@@ -3,9 +3,9 @@ controllers:
     type: attribute
 
 app_cours:
-    path: \cours
+    path: /cours
     controller: App\Controller\CoursController::index
 
 coursLister:
-    path: \cours\lister
+    path: /cours/lister
     controller: App\Controller\CoursController::lister
