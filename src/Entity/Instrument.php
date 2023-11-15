@@ -42,9 +42,13 @@ class Instrument
     #[ORM\JoinColumn(nullable: false)]
     private ?TypeInstrument $id_type = null;
 
+    #[ORM\OneToMany(mappedBy: 'id_instrument', targetEntity: Accessoire::class)]
+    private Collection $accessoires;
+
     public function __construct()
     {
         $this->couleurs = new ArrayCollection();
+        $this->accessoires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +160,36 @@ class Instrument
     public function setIdType(?TypeInstrument $id_type): static
     {
         $this->id_type = $id_type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Accessoire>
+     */
+    public function getAccessoires(): Collection
+    {
+        return $this->accessoires;
+    }
+
+    public function addAccessoire(Accessoire $accessoire): static
+    {
+        if (!$this->accessoires->contains($accessoire)) {
+            $this->accessoires->add($accessoire);
+            $accessoire->setIdInstrument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccessoire(Accessoire $accessoire): static
+    {
+        if ($this->accessoires->removeElement($accessoire)) {
+            // set the owning side to null (unless already changed)
+            if ($accessoire->getIdInstrument() === $this) {
+                $accessoire->setIdInstrument(null);
+            }
+        }
 
         return $this;
     }
