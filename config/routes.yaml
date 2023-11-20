@@ -6,6 +6,10 @@ app_cours:
     path: /cours
     controller: App\Controller\CoursController::index
 
+coursConsulter:
+    path: /cours/consulter/{id}
+    controller: App\Controller\CoursController::consulter
+
 coursLister:
     path: /cours/lister
     controller: App\Controller\CoursController::lister
