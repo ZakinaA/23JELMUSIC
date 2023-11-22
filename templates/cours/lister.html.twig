@@ -16,7 +16,7 @@ LISTE DES COURS :</br>
             <td>Jours du cours</td>
             <td>Heure de début</td>
             <td>Heure de fin</td>
-            <td>Instrument</td>
+            <td>Libelle du cours</td>
             <td>Âge minimum</td>
             <td>Nombre de place dans le cours</td>
         </tr>
@@ -24,7 +24,7 @@ LISTE DES COURS :</br>
         <td>{{c.jours.libelle}}</td>
         <td>{{c.heuredebut|date('H:i:s')}}</td>
         <td>{{c.heurefin|date('H:i:s')}}</td>
-        <td><a href="{{ path('coursConsulter', { 'id': c.id }) }}">{{ c.instrument.nom }}</a></td>
+        <td><a href="{{ path('coursConsulter', { 'id': c.id }) }}">{{ c.libelle }}</a></td>
         <td>{{c.agemini}}</a></td>
         <td>{{c.nbplaces}}</td>
     {% else %}
