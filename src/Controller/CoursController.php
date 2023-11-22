@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Form\CoursType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 //use Symfony\Component\Routing\Annotation\Route;
 
 class CoursController extends AbstractController
@@ -18,7 +21,7 @@ class CoursController extends AbstractController
         ]);
     }
     //#[Route('/cours/lister', name: 'coursLister')]
-    public function lister(ManagerRegistry $doctrine){
+    public function listerCours(ManagerRegistry $doctrine){
 
         $repository = $doctrine->getRepository(Cours::class);
 
@@ -28,7 +31,7 @@ class CoursController extends AbstractController
     }
 
     //#[Route('/cours/consulter/{id}', name: 'coursConsulter')]
-    public function consulter(ManagerRegistry $doctrine, int $id){
+    public function consulterCours(ManagerRegistry $doctrine, int $id){
 
         $cours= $doctrine->getRepository(Cours::class)->find($id);
 
@@ -38,8 +41,33 @@ class CoursController extends AbstractController
             );
         }
 
+        $eleveInscrits = $cours->getEleve();
+
         //return new Response('cours : '.$cours->getLibelle());
         return $this->render('cours/consulter.html.twig', [
-            'cours' => $cours,]);
+            'cours' => $cours,
+            'eleveInscrits' => $eleveInscrits,]);
+    }
+
+    //#[Route('/cours/ajouter', name: 'coursAjouter')]
+    public function ajouterCours(Request $request, PersistenceManagerRegistry $doctrine):Response
+    {
+        $cours = new cours();
+        $form = $this->createForm(CoursType::class, $cours);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($cours);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Cours created successfully!');
+            return $this->redirectToRoute('coursLister');
+        }
+
+        return $this->render('cours/ajouter.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
