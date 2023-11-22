@@ -33,25 +33,25 @@ class Instrument
 
     #[ORM\ManyToOne(inversedBy: 'instruments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Marque $id_marque = null;
+    private ?Marque $marque = null;
 
     #[ORM\ManyToOne(inversedBy: 'instruments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?TypeInstrument $id_type = null;
+    private ?TypeInstrument $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_instrument', targetEntity: Accessoire::class)]
+    #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: Accessoire::class)]
     private Collection $accessoires;
 
     #[ORM\Column(length: 70)]
-    private ?string $Nom = null;
+    private ?string $nom = null;
 
     #[ORM\ManyToMany(targetEntity: couleur::class, inversedBy: 'instruments')]
-    private Collection $Couleurs;
+    private Collection $couleurs;
 
     public function __construct()
     {
         $this->accessoires = new ArrayCollection();
-        $this->Couleurs = new ArrayCollection();
+        $this->couleurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,27 +118,26 @@ class Instrument
 
         return $this;
     }
-
-    public function getIdMarque(): ?Marque
+    public function getMarque(): ?Marque
     {
-        return $this->id_marque;
+        return $this->marque;
     }
 
-    public function setIdMarque(?Marque $id_marque): static
+    public function setMarque(?Marque $marque): static
     {
-        $this->id_marque = $id_marque;
+        $this->marque = $marque;
 
         return $this;
     }
 
-    public function getIdType(): ?TypeInstrument
+    public function getType(): ?TypeInstrument
     {
-        return $this->id_type;
+        return $this->type;
     }
 
-    public function setIdType(?TypeInstrument $id_type): static
+    public function setType(?TypeInstrument $type): static
     {
-        $this->id_type = $id_type;
+        $this->type = $type;
 
         return $this;
     }
@@ -155,7 +154,7 @@ class Instrument
     {
         if (!$this->accessoires->contains($accessoire)) {
             $this->accessoires->add($accessoire);
-            $accessoire->setIdInstrument($this);
+            $accessoire->setInstrument($this);
         }
 
         return $this;
@@ -165,8 +164,8 @@ class Instrument
     {
         if ($this->accessoires->removeElement($accessoire)) {
             // set the owning side to null (unless already changed)
-            if ($accessoire->getIdInstrument() === $this) {
-                $accessoire->setIdInstrument(null);
+            if ($accessoire->getInstrument() === $this) {
+                $accessoire->setInstrument(null);
             }
         }
 
@@ -175,12 +174,12 @@ class Instrument
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): static
+    public function setNom(string $nom): static
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -190,13 +189,13 @@ class Instrument
      */
     public function getCouleurs(): Collection
     {
-        return $this->Couleurs;
+        return $this->couleurs;
     }
 
     public function addCouleur(couleur $couleur): static
     {
-        if (!$this->Couleurs->contains($couleur)) {
-            $this->Couleurs->add($couleur);
+        if (!$this->couleurs->contains($couleur)) {
+            $this->couleurs->add($couleur);
         }
 
         return $this;
@@ -204,7 +203,7 @@ class Instrument
 
     public function removeCouleur(couleur $couleur): static
     {
-        $this->Couleurs->removeElement($couleur);
+        $this->couleurs->removeElement($couleur);
 
         return $this;
     }

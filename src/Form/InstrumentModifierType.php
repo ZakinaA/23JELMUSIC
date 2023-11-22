@@ -22,15 +22,15 @@ class InstrumentModifierType extends AbstractType
             ->add('prixAchat', NumberType::class)
             ->add('utilisation', TextType::class)
             ->add('cheminImage', TextType::class)
-            ->add('Nom', TextType::class)
-            ->add('id_marque', EntityType::class, array('class' => 'App\Entity\Marque', 'choice_label' => 'libelle'))
-            ->add('id_type', EntityType::class, array('class' => 'App\Entity\TypeInstrument', 'choice_label' => 'libelle'))
+            ->add('nom', TextType::class)
+            ->add('marque', EntityType::class, array('class' => 'App\Entity\Marque', 'choice_label' => 'libelle'))
+            ->add('type', EntityType::class, array('class' => 'App\Entity\TypeInstrument', 'choice_label' => 'libelle'))
             ->add('enregistrer', SubmitType::class, array('label' => 'Modifier Instrument'));
         ;
     }
 
     public function getParent(){
-        return InstrumentType::class;
+        return InstrumentAjouterType::class;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

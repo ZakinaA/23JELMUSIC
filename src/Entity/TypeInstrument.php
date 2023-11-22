@@ -20,9 +20,9 @@ class TypeInstrument
 
     #[ORM\ManyToOne(inversedBy: 'typeInstruments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ClasseInstrument $id_classe = null;
+    private ?ClasseInstrument $classe = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_type', targetEntity: Instrument::class)]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Instrument::class)]
     private Collection $instruments;
 
     public function __construct()
@@ -47,14 +47,14 @@ class TypeInstrument
         return $this;
     }
 
-    public function getIdClasse(): ?ClasseInstrument
+    public function getClasse(): ?ClasseInstrument
     {
-        return $this->id_classe;
+        return $this->classe;
     }
 
-    public function setIdClasse(?ClasseInstrument $id_classe): static
+    public function setClasse(?ClasseInstrument $classe): static
     {
-        $this->id_classe = $id_classe;
+        $this->classe = $classe;
 
         return $this;
     }
@@ -71,7 +71,7 @@ class TypeInstrument
     {
         if (!$this->instruments->contains($instrument)) {
             $this->instruments->add($instrument);
-            $instrument->setIdType($this);
+            $instrument->setType($this);
         }
 
         return $this;
@@ -81,8 +81,8 @@ class TypeInstrument
     {
         if ($this->instruments->removeElement($instrument)) {
             // set the owning side to null (unless already changed)
-            if ($instrument->getIdType() === $this) {
-                $instrument->setIdType(null);
+            if ($instrument->getType() === $this) {
+                $instrument->setType(null);
             }
         }
 

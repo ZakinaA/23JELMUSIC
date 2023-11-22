@@ -18,7 +18,7 @@ class ClasseInstrument
     #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_classe', targetEntity: TypeInstrument::class)]
+    #[ORM\OneToMany(mappedBy: 'classe', targetEntity: TypeInstrument::class)]
     private Collection $typeInstruments;
 
     public function __construct()
@@ -55,7 +55,7 @@ class ClasseInstrument
     {
         if (!$this->typeInstruments->contains($typeInstrument)) {
             $this->typeInstruments->add($typeInstrument);
-            $typeInstrument->setIdClasse($this);
+            $typeInstrument->setClasse($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class ClasseInstrument
     {
         if ($this->typeInstruments->removeElement($typeInstrument)) {
             // set the owning side to null (unless already changed)
-            if ($typeInstrument->getIdClasse() === $this) {
-                $typeInstrument->setIdClasse(null);
+            if ($typeInstrument->getClasse() === $this) {
+                $typeInstrument->setClasse(null);
             }
         }
 

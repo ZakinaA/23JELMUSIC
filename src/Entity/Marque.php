@@ -18,7 +18,7 @@ class Marque
     #[ORM\Column(length: 70)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_marque', targetEntity: Instrument::class)]
+    #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Instrument::class)]
     private Collection $instruments;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Marque
     {
         if (!$this->instruments->contains($instrument)) {
             $this->instruments->add($instrument);
-            $instrument->setIdMarque($this);
+            $instrument->setMarque($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Marque
     {
         if ($this->instruments->removeElement($instrument)) {
             // set the owning side to null (unless already changed)
-            if ($instrument->getIdMarque() === $this) {
-                $instrument->setIdMarque(null);
+            if ($instrument->getMarque() === $this) {
+                $instrument->setMarque(null);
             }
         }
 

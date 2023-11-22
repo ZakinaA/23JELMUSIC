@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Instrument;
 use App\Entity\Intervention;
 use App\Form\InstrumentModifierType;
-use App\Form\InstrumentType;
+use App\Form\InstrumentAjouterType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +43,7 @@ class InstrumentController extends AbstractController
 
     public function ajouterInstrument(ManagerRegistry $doctrine,Request $request){
         $instrument = new Instrument();
-        $form = $this->createForm(InstrumentType::class, $instrument);
+        $form = $this->createForm(InstrumentAjouterType::class, $instrument);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

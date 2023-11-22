@@ -18,7 +18,7 @@ class Accessoire
 
     #[ORM\ManyToOne(inversedBy: 'accessoires')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Instrument $id_instrument = null;
+    private ?Instrument $instrument = null;
 
     public function getId(): ?int
     {
@@ -37,14 +37,14 @@ class Accessoire
         return $this;
     }
 
-    public function getIdInstrument(): ?Instrument
+    public function getInstrument(): ?Instrument
     {
-        return $this->id_instrument;
+        return $this->instrument;
     }
 
-    public function setIdInstrument(?Instrument $id_instrument): static
+    public function setInstrument(?Instrument $instrument): static
     {
-        $this->id_instrument = $id_instrument;
+        $this->instrument = $instrument;
 
         return $this;
     }

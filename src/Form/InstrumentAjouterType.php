@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class InstrumentType extends AbstractType
+class InstrumentAjouterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -25,9 +25,9 @@ class InstrumentType extends AbstractType
             ->add('prixAchat', NumberType::class)
             ->add('utilisation', TextType::class)
             ->add('cheminImage', TextType::class)
-            ->add('Nom', TextType::class)
-            ->add('id_marque', EntityType::class, array('class' => 'App\Entity\Marque', 'choice_label' => 'libelle'))
-            ->add('id_type', EntityType::class, array('class' => 'App\Entity\TypeInstrument', 'choice_label' => 'libelle'))
+            ->add('nom', TextType::class)
+            ->add('marque', EntityType::class, array('class' => 'App\Entity\Marque', 'choice_label' => 'libelle'))
+            ->add('type', EntityType::class, array('class' => 'App\Entity\TypeInstrument', 'choice_label' => 'libelle'))
             ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel Instrument'));
     }
 
