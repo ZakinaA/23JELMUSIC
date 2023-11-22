@@ -8,8 +8,12 @@ app_cours:
 
 coursConsulter:
     path: /cours/consulter/{id}
-    controller: App\Controller\CoursController::consulter
+    controller: App\Controller\CoursController::consulterCours
 
 coursLister:
     path: /cours/lister
-    controller: App\Controller\CoursController::lister
+    controller: App\Controller\CoursController::listerCours
+
+coursAjouter:
+    path: /cours/ajouter
+    controller: App\Controller\CoursController::ajouterCours
