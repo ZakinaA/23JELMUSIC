@@ -17,7 +17,7 @@ class Inscription
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateInscription = null;
 
-    #[ORM\ManyToOne(inversedBy: 'eleve')]
+    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
     private ?Cours $cours = null;
 
     #[ORM\ManyToOne(inversedBy: 'inscriptions')]
