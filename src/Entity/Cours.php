@@ -44,11 +44,11 @@ class Cours
     private ?Professeur $professeur = null;
 
     #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Inscription::class)]
-    private Collection $eleve;
+    private Collection $inscriptions;
 
     public function __construct()
     {
-        $this->eleve = new ArrayCollection();
+        $this->inscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,27 +167,27 @@ class Cours
     /**
      * @return Collection<int, Inscription>
      */
-    public function getEleve(): Collection
+    public function getInscriptions(): Collection
     {
-        return $this->eleve;
+        return $this->inscriptions;
     }
 
-    public function addEleve(Inscription $eleve): static
+    public function addInscriptions(Inscription $inscription): static
     {
-        if (!$this->eleve->contains($eleve)) {
-            $this->eleve->add($eleve);
-            $eleve->setCours($this);
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions->add($inscription);
+            $inscription->setCours($this);
         }
 
         return $this;
     }
 
-    public function removeEleve(Inscription $eleve): static
+    public function removeInscriptions(Inscription $inscription): static
     {
-        if ($this->eleve->removeElement($eleve)) {
+        if ($this->inscriptions->removeElement($inscription)) {
             // set the owning side to null (unless already changed)
-            if ($eleve->getCours() === $this) {
-                $eleve->setCours(null);
+            if ($inscription->getCours() === $this) {
+                $inscription->setCours(null);
             }
         }
 

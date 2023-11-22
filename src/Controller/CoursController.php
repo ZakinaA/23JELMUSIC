@@ -41,7 +41,7 @@ class CoursController extends AbstractController
             );
         }
 
-        $eleveInscrits = $cours->getEleve();
+        $eleveInscrits = $cours->getInscriptions();
 
         //return new Response('cours : '.$cours->getLibelle());
         return $this->render('cours/consulter.html.twig', [
