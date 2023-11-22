@@ -45,3 +45,7 @@ ContratPretConsulter:
 ContratPretAjouter:
     path: /contratPret/ajouter
     controller: App\Controller\ContratPretController::ajouterContratPret
+
+ContratPretModifier:
+    path: /contratPret/modifier/{id}
+    controller: App\Controller\ContratPretController::modifierContratPret
