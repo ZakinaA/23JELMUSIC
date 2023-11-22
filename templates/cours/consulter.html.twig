@@ -21,7 +21,7 @@
     <tr><td>Nombre de places : </td><td>{{cours.nbplaces}}</td></tr>
     <tr><td>Age Maximum : </td><td>{{cours.agemaxi}}</td></tr>
 </table>
-<h5>Liste des elèves inscrits :</h5></br>
+<h5>Liste des elèves inscrits :</h5>
 <ul>
     {% for inscription in eleveInscrits %}
         <li>{{inscription.eleve.nom}} {{inscription.eleve.prenom}}</li>
