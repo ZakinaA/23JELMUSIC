@@ -25,6 +25,8 @@
 <ul>
     {% for inscription in eleveInscrits %}
         <li>{{inscription.eleve.nom}} {{inscription.eleve.prenom}}</li>
+    {% else %}
+            <li>Aucun eleve inscrit.</li>
     {% endfor %}
 </ul>
 </body>
