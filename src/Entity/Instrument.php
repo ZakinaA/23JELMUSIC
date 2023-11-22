@@ -31,9 +31,6 @@ class Instrument
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cheminImage = null;
 
-    #[ORM\ManyToMany(targetEntity: Couleur::class)]
-    private Collection $couleurs;
-
     #[ORM\ManyToOne(inversedBy: 'instruments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Marque $id_marque = null;
@@ -45,10 +42,16 @@ class Instrument
     #[ORM\OneToMany(mappedBy: 'id_instrument', targetEntity: Accessoire::class)]
     private Collection $accessoires;
 
+    #[ORM\Column(length: 70)]
+    private ?string $Nom = null;
+
+    #[ORM\ManyToMany(targetEntity: couleur::class, inversedBy: 'instruments')]
+    private Collection $Couleurs;
+
     public function __construct()
     {
-        $this->couleurs = new ArrayCollection();
         $this->accessoires = new ArrayCollection();
+        $this->Couleurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,30 +119,6 @@ class Instrument
         return $this;
     }
 
-    /**
-     * @return Collection<int, Couleur>
-     */
-    public function getCouleurs(): Collection
-    {
-        return $this->couleurs;
-    }
-
-    public function addCouleur(Couleur $couleur): static
-    {
-        if (!$this->couleurs->contains($couleur)) {
-            $this->couleurs->add($couleur);
-        }
-
-        return $this;
-    }
-
-    public function removeCouleur(Couleur $couleur): static
-    {
-        $this->couleurs->removeElement($couleur);
-
-        return $this;
-    }
-
     public function getIdMarque(): ?Marque
     {
         return $this->id_marque;
@@ -190,6 +169,42 @@ class Instrument
                 $accessoire->setIdInstrument(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->Nom;
+    }
+
+    public function setNom(string $Nom): static
+    {
+        $this->Nom = $Nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, couleur>
+     */
+    public function getCouleurs(): Collection
+    {
+        return $this->Couleurs;
+    }
+
+    public function addCouleur(couleur $couleur): static
+    {
+        if (!$this->Couleurs->contains($couleur)) {
+            $this->Couleurs->add($couleur);
+        }
+
+        return $this;
+    }
+
+    public function removeCouleur(couleur $couleur): static
+    {
+        $this->Couleurs->removeElement($couleur);
 
         return $this;
     }
