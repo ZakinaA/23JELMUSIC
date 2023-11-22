@@ -24,7 +24,6 @@ class CoursType extends AbstractType
             ->add('typeCours', EntityType::class, array('class' => 'App\Entity\TypeCours','choice_label' => 'libelle' ))
             ->add('jours', EntityType::class, array('class' => 'App\Entity\Jours','choice_label' => 'libelle' ))
             ->add('professeur', EntityType::class, array('class' => 'App\Entity\Professeur','choice_label' => 'nom' ))
-            ->add('instrument', EntityType::class, array('class' => 'App\Entity\Instrument','choice_label' => 'nom' ))
             ->add('save', SubmitType::class, array('label' => 'Créer un cours'));
         ;
     }
