@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<h5>PAGE DE CONSULTATION D'UN CONTRAT PRET</h5>
+<p>
+<table >
+    <tr><td>Id : </td><td>{{contratPret.id}} </td></tr>
+    <tr><td>Eleve : </td><td>{{contratPret.eleve.nom}} {{contratPret.eleve.prenom}}</td>
+    <tr><td>Date du pret : </td><td>du {{contratPret.datedebut|date("d/m/Y")}} au {{contratPret.datefin|date("d/m/Y")}}</td></tr>
+    <tr><td>Attestation d'assurance : </td><td>{{contratPret.Attestationassurance}} </td></tr>
+    <tr><td>Etat de l'instrument : </td><td>avant: {{contratPret.etatdetailledebut}} / apres: {{contratPret.etatdetailleretour}}</td></tr>
+
+</table>
+</body>
+</html>
+
