@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CoursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,6 +39,17 @@ class Cours
 
     #[ORM\ManyToOne(inversedBy: 'cours')]
     private ?Jours $jours = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cours')]
+    private ?Professeur $professeur = null;
+
+    #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Inscription::class)]
+    private Collection $eleve;
+
+    public function __construct()
+    {
+        $this->eleve = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,6 +148,48 @@ class Cours
     public function setJours(?Jours $jours): static
     {
         $this->jours = $jours;
+
+        return $this;
+    }
+
+    public function getProfesseur(): ?Professeur
+    {
+        return $this->professeur;
+    }
+
+    public function setProfesseur(?Professeur $professeur): static
+    {
+        $this->professeur = $professeur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inscription>
+     */
+    public function getEleve(): Collection
+    {
+        return $this->eleve;
+    }
+
+    public function addEleve(Inscription $eleve): static
+    {
+        if (!$this->eleve->contains($eleve)) {
+            $this->eleve->add($eleve);
+            $eleve->setCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEleve(Inscription $eleve): static
+    {
+        if ($this->eleve->removeElement($eleve)) {
+            // set the owning side to null (unless already changed)
+            if ($eleve->getCours() === $this) {
+                $eleve->setCours(null);
+            }
+        }
 
         return $this;
     }
