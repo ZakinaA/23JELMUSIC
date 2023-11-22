@@ -34,3 +34,6 @@ coursAjouter:
     path: /cours/ajouter
     controller: App\Controller\CoursController::ajouterCours
 
+ContratPretlister:
+    path: /contratPret/lister
+    controller: App\Controller\ContratPretController::listerContratPret
