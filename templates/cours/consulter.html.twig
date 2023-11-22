@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>{% block title %}CONSULTATION D'UN COURS{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
 </head>
 <body>
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+
 <h5>PAGE DE CONSULTATION D'UN COURS</h5>
 <p>
-<table >
+<table>
+    <tr><td>Professeur :</td><td>{{cours.professeur.nom}}</td><td>{{cours.professeur.prenom}}</td></tr>
     <tr><td>Id : </td><td>{{cours.id}} </td></tr>
     <tr><td>Libelle : </td><td>{{cours.libelle}}</td>
-    <tr><td>Age Minimum : </td><td>{{cours.age_mini}}</td></tr></tr>
-    <tr><td>Heure de début : </td><td>{{cours.heure_debut}}</td></tr>
-    <tr><td>Heure de fin : </td><td>{{cours.heure_fin}}</td></tr>
-    <tr><td>Nombre de places : </td><td>{{cours.nb_places}}</td></tr>
-    <tr><td>Age Maximum : </td><td>{{cours.age_maxi}}</td></tr>
+    <tr><td>Age Minimum : </td><td>{{cours.agemini}}</td></tr>
+    <tr><td>Heure de début : </td><td>{{cours.heuredebut|date('H:i:s')}}</td></tr>
+    <tr><td>Heure de fin : </td><td>{{cours.heurefin|date('H:i:s')}}</td></tr>
+    <tr><td>Nombre de places : </td><td>{{cours.nbplaces}}</td></tr>
+    <tr><td>Age Maximum : </td><td>{{cours.agemaxi}}</td></tr>
 </table>
+<h5>Liste des elèves inscrits :</h5></br>
+<ul>
+    {% for inscription in eleveInscrits %}
+        <li>{{inscription.eleve.nom}} {{inscription.eleve.prenom}}</li>
+    {% endfor %}
+</ul>
 </body>
 </html>
