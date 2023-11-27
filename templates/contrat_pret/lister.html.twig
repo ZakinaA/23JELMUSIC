@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+<h2>LISTE DES CONTRATS DE PRÊT</h2>
+
+<table border="1">
+    <tr>
+        <th>Nom élève</th>
+        <th>Prénom élève</th>
+        <th>Date Début</th>
+        <th>Date Fin</th>
+        <th>Attestation d'Assurance</th>
+        <th>État Détaillé Début</th>
+        <th>État Détaillé Retour</th>
+
+    </tr>
+
+    {% for c in pContratPret %}
+        <tr>
+            {% if c.eleve %}
+                <td>{{ c.eleve.nom }}</td>
+                <td>{{ c.eleve.prenom }}</td>
+            {% else %}
+                <td>N/A</td>
+                <td>N/A</td>
+            {% endif %}
+            <td>{{ c.dateDebut|date('d/m/Y') }}</td>
+            <td>{{ c.dateFin|date('d/m/Y')}}</td>
+            <td>{{ c.attestationAssurance }}</td>
+            <td>{{ c.etatDetailleDebut }}</td>
+            <td>{{ c.etatDetailleRetour }}</td>
+
+            {% if c.eleve %}
+                <td>{{ c.eleve.nom }}</td>
+                <td>{{ c.eleve.prenom }}</td>
+            {% else %}
+                <td>N/A</td>
+                <td>N/A</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+
+    {% if pContratPret is empty %}
+        <tr>
+            <td colspan="8">Aucun contrat de prêt n'a été trouvé.</td>
+        </tr>
+    {% endif %}
+</table>
+
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>
+
