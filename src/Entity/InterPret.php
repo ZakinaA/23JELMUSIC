@@ -16,6 +16,12 @@ class InterPret
     #[ORM\Column(nullable: true)]
     private ?int $quotite = null;
 
+    #[ORM\ManyToOne(inversedBy: 'interPrets')]
+    private ?Intervention $intervention = null;
+
+    #[ORM\ManyToOne(inversedBy: 'interPrets')]
+    private ?ContratPret $contratPret = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +35,30 @@ class InterPret
     public function setQuotite(?int $quotite): static
     {
         $this->quotite = $quotite;
+
+        return $this;
+    }
+
+    public function getIntervention(): ?Intervention
+    {
+        return $this->intervention;
+    }
+
+    public function setIntervention(?Intervention $intervention): static
+    {
+        $this->intervention = $intervention;
+
+        return $this;
+    }
+
+    public function getContratPret(): ?ContratPret
+    {
+        return $this->contratPret;
+    }
+
+    public function setContratPret(?ContratPret $contratPret): static
+    {
+        $this->contratPret = $contratPret;
 
         return $this;
     }
