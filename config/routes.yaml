@@ -18,6 +18,10 @@ InstrumentModifier:
     path: /instrument/modifier/{id}
     controller: App\Controller\InstrumentController::modifierInstrument
 
+InstrumentSupprimer:
+    path: /instrument/supprimer
+    controller: App\Controller\InstrumentController::supprimerInstrument
+
 app_cours:
     path: /cours
     controller: App\Controller\CoursController::index
