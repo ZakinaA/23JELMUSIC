@@ -22,7 +22,7 @@
 
     {% for i in pIntervention %}
         <tr>
-            {% if i.intervention %}
+            {% if i.professionnel is defined and i.instrument is defined %}
                 <td>{{ i.professionnel.nom }}</td>
                 <td>{{ i.instrument.nom }}</td>
             {% else %}
