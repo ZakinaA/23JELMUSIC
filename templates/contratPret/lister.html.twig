@@ -30,7 +30,7 @@
                 <td>N/A</td>
                 <td>N/A</td>
             {% endif %}
-            <td>{{ c.dateDebut|date('d/m/Y') }}</td>
+            <td><a href="{{ path('ContratPretConsulter', { 'id': c.id }) }}">{{ c.dateDebut|date('d/m/Y') }}</td>
             <td>{{ c.dateFin|date('d/m/Y')}}</td>
             <td>{{ c.attestationAssurance }}</td>
             <td>{{ c.etatDetailleDebut }}</td>
