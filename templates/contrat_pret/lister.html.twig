@@ -36,13 +36,6 @@
             <td>{{ c.etatDetailleDebut }}</td>
             <td>{{ c.etatDetailleRetour }}</td>
 
-            {% if c.eleve %}
-                <td>{{ c.eleve.nom }}</td>
-                <td>{{ c.eleve.prenom }}</td>
-            {% else %}
-                <td>N/A</td>
-                <td>N/A</td>
-            {% endif %}
         </tr>
     {% endfor %}
 
