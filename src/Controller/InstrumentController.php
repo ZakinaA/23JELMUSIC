@@ -92,4 +92,8 @@ class InstrumentController extends AbstractController
         }
     }
 
+    public function supprimerInstrument(){
+
+    }
+
 }
