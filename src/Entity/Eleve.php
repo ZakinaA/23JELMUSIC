@@ -195,7 +195,7 @@ class Eleve
         return $this->contratprets;
     }
 
-    public function addContratPret(Contratpret $contratpret): static
+    public function addContratpret(Contratpret $contratpret): static
     {
         if (!$this->contratprets->contains($contratpret)) {
             $this->contratprets->add($contratpret);
@@ -205,7 +205,7 @@ class Eleve
         return $this;
     }
 
-    public function removeContratPret(Contratpret $contratpret): static
+    public function removeContratpret(Contratpret $contratpret): static
     {
         if ($this->contratprets->removeElement($contratpret)) {
             // set the owning side to null (unless already changed)

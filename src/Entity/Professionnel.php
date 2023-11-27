@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProfessionnelRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfessionnelRepository::class)]
@@ -33,6 +35,18 @@ class Professionnel
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mail = null;
+
+    #[ORM\OneToMany(mappedBy: 'professionnel', targetEntity: Intervention::class)]
+    private Collection $interventions;
+
+    #[ORM\ManyToMany(targetEntity: Metier::class, inversedBy: 'professionnels')]
+    private Collection $metier;
+
+    public function __construct()
+    {
+        $this->interventions = new ArrayCollection();
+        $this->metier = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +133,60 @@ class Professionnel
     public function setMail(?string $mail): static
     {
         $this->mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Intervention>
+     */
+    public function getInterventions(): Collection
+    {
+        return $this->interventions;
+    }
+
+    public function addIntervention(Intervention $intervention): static
+    {
+        if (!$this->interventions->contains($intervention)) {
+            $this->interventions->add($intervention);
+            $intervention->setProfessionnel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIntervention(Intervention $intervention): static
+    {
+        if ($this->interventions->removeElement($intervention)) {
+            // set the owning side to null (unless already changed)
+            if ($intervention->getProfessionnel() === $this) {
+                $intervention->setProfessionnel(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Metier>
+     */
+    public function getMetier(): Collection
+    {
+        return $this->metier;
+    }
+
+    public function addMetier(Metier $metier): static
+    {
+        if (!$this->metier->contains($metier)) {
+            $this->metier->add($metier);
+        }
+
+        return $this;
+    }
+
+    public function removeMetier(Metier $metier): static
+    {
+        $this->metier->removeElement($metier);
 
         return $this;
     }
