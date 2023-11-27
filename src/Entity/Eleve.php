@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EleveRepository;
+use App\Entity\ContratPret;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,7 +43,7 @@ class Eleve
     #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: Inscription::class)]
     private Collection $inscriptions;
 
-    #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: Contratpret::class)]
+    #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: ContratPret::class)]
     private Collection $contratprets;
 
     #[ORM\ManyToMany(targetEntity: Responsable::class, inversedBy: 'eleves')]
@@ -188,14 +189,14 @@ class Eleve
     }
 
     /**
-     * @return Collection<int, Contratpret>
+     * @return Collection<int, ContratPret>
      */
     public function getContratprets(): Collection
     {
         return $this->contratprets;
     }
 
-    public function addContratpret(Contratpret $contratpret): static
+    public function addContratPret(ContratPret $contratpret): static
     {
         if (!$this->contratprets->contains($contratpret)) {
             $this->contratprets->add($contratpret);
@@ -205,7 +206,7 @@ class Eleve
         return $this;
     }
 
-    public function removeContratpret(Contratpret $contratpret): static
+    public function removeContratPret(ContratPret $contratpret): static
     {
         if ($this->contratprets->removeElement($contratpret)) {
             // set the owning side to null (unless already changed)

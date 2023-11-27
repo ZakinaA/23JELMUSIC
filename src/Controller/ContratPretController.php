@@ -18,7 +18,7 @@ class ContratPretController extends AbstractController
     //#[Route('/contrat/pret', name: 'app_contrat_pret')]
     public function index(): Response
     {
-        return $this->render('contrat_pret/index.html.twig', [
+        return $this->render('contratPret/index.html.twig', [
             'controller_name' => 'ContratPretController',
         ]);
     }
@@ -28,7 +28,7 @@ class ContratPretController extends AbstractController
         $repository = $doctrine->getRepository(ContratPret::class);
 
         $contratPrets= $repository->findAll();
-        return $this->render('contrat_Pret/lister.html.twig', [
+        return $this->render('contratPret/lister.html.twig', [
             'pContratPret' => $contratPrets,]);
 
     }
@@ -44,7 +44,7 @@ class ContratPretController extends AbstractController
         }
 
         //return new Response('ContratPret : '.$ContratPret->getNom());
-        return $this->render('contrat_Pret/consulter.html.twig', [
+        return $this->render('contratPret/consulter.html.twig', [
             'contratPret' => $contratPret,]);
     }
 
@@ -52,7 +52,7 @@ class ContratPretController extends AbstractController
 
         $contratPret = new contratPret();
         $form = $this->createForm(ContratPretType::class, $contratPret);
-        return $this->render('contrat_Pret/ajouter.html.twig', array(
+        return $this->render('contratPret/ajouter.html.twig', array(
             'form' => $form->createView(), ));
     }
 
@@ -78,10 +78,10 @@ class ContratPretController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($contratPret);
                 $entityManager->flush();
-                return $this->render('contrat_pret/consulter.html.twig', ['contratPret' => $contratPret, 'pContratPrets' => $contratPrets]);
+                return $this->render('contratPret/consulter.html.twig', ['contratPret' => $contratPret, 'pContratPrets' => $contratPrets]);
             }
             else{
-                return $this->render('contrat_Pret/ajouter.html.twig', array('form' => $form->createView(),));
+                return $this->render('contratPret/ajouter.html.twig', array('form' => $form->createView(),));
             }
         }
     }
