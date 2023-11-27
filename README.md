@@ -1,3 +1,3 @@
 # 23JELMUSIC
 
-Membre : Louna / Jules / Eliot
+Membres : Louna / Jules / Eliot
