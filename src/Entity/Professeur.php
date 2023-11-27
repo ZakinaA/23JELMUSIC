@@ -42,6 +42,9 @@ class Professeur
     #[ORM\OneToMany(mappedBy: 'professeur', targetEntity: Cours::class)]
     private Collection $cours;
 
+    #[ORM\ManyToOne]
+    private ?TypeInstrument $typeInstrument = null;
+
     public function __construct()
     {
         $this->cours = new ArrayCollection();
@@ -174,6 +177,18 @@ class Professeur
                 $cour->setProfesseur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTypeInstrument(): ?TypeInstrument
+    {
+        return $this->typeInstrument;
+    }
+
+    public function setTypeInstrument(?TypeInstrument $typeInstrument): static
+    {
+        $this->typeInstrument = $typeInstrument;
 
         return $this;
     }
