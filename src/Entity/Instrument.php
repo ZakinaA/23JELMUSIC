@@ -45,7 +45,7 @@ class Instrument
     #[ORM\Column(length: 70)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: couleur::class, inversedBy: 'instruments')]
+    #[ORM\ManyToMany(targetEntity: Couleur::class, inversedBy: 'instruments')]
     private Collection $couleurs;
 
     public function __construct()
@@ -185,14 +185,14 @@ class Instrument
     }
 
     /**
-     * @return Collection<int, couleur>
+     * @return Collection<int, Couleur>
      */
     public function getCouleurs(): Collection
     {
         return $this->couleurs;
     }
 
-    public function addCouleur(couleur $couleur): static
+    public function addCouleur(Couleur $couleur): static
     {
         if (!$this->couleurs->contains($couleur)) {
             $this->couleurs->add($couleur);
@@ -201,7 +201,7 @@ class Instrument
         return $this;
     }
 
-    public function removeCouleur(couleur $couleur): static
+    public function removeCouleur(Couleur $couleur): static
     {
         $this->couleurs->removeElement($couleur);
 
