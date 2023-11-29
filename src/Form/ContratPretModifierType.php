@@ -16,6 +16,7 @@ class ContratPretModifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('Instrument',EntityType::class, array ('class' => 'App\Entity\Instrument','choice_label' => 'nom' ))
             ->add('dateDebut',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
