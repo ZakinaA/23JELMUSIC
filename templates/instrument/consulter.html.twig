@@ -13,7 +13,7 @@
         <tr><td>Type de l'instrument : </td><td>{{instrument.type.libelle}}</td></tr>
         <tr><td>numéro de série de l'instrument : </td><td>{{instrument.numSerie}}</td></tr>
         <tr><td>Date d'achat de l'instrument : </td><td>{{instrument.dateAchat|date("d/m/Y")}}</td></tr>
-        <tr><td>Prix d'achat de l'instrument : </td><td>{{instrument.prixAchat}}</td></tr>
+        <tr><td>Prix d'achat de l'instrument : </td><td>{{instrument.prixAchat}} €</td></tr>
         <tr><td>Utilisation de l'instrument : </td><td>{{instrument.utilisation}}</td></tr>
     </table>
 
@@ -37,7 +37,7 @@
                 <td>{{ intervention.dateFin|date("d/m/Y") }}</td>
                 <td>{{ intervention.professionnel.nom }} <br> {{ intervention.professionnel.numRue }} {{ intervention.professionnel.rue }} <br> {{ intervention.professionnel.copos }} {{ intervention.professionnel.ville }}</td>
                 <td>{{ intervention.descriptif }}</td>
-                <td>{{ intervention.prix }}</td>
+                <td>{{ intervention.prix }} €</td>
 
             </tr>
         {% else %}
