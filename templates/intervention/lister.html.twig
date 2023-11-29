@@ -17,6 +17,7 @@
         <th>Date Début</th>
         <th>Date Fin</th>
         <th>Prix</th>
+        <th>quotite</th>
 
     </tr>
 
@@ -31,6 +32,9 @@
             <td>{{ i.dateFin|date('d/m/Y')}}</td>
             <td>{{ i.prix }}</td>
 
+            {% for p in i.interPrets %}
+                <td>{{ p.quotite }}</td>
+            {% endfor %}
         </tr>
     {% endfor %}
 
