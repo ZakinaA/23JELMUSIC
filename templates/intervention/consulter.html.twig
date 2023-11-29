@@ -4,16 +4,19 @@
 
 </head>
 <body>
-<h5>PAGE DE CONSULTATION D'UNE INTERVENTION</h5>
+<h3>Page de consultation de l'intervention sur {{intervention.instrument.nom}}</h3>
 <p>
 <table >
-    <tr><td>Id : </td><td>{{intervention.id}} </td></tr>
     <tr><td>Intrument : </td><td>{{intervention.instrument.nom}}</td></tr>
     <tr><td>Professionnel : </td><td>{{intervention.professionnel.nom}}</td></tr>
     <tr><td>Descriptif : </td><td>{{intervention.descriptif}} </td></tr>
     <tr><td>Date : </td><td>du {{intervention.datedebut|date("d/m/Y")}} au {{intervention.datefin|date("d/m/Y")}}</td></tr>
-    <tr><td>Prix : </td><td>{{intervention.prix}} €</td></tr>
-
+    <tr><td>Prix : </td><td>{{intervention.prix}}€</td></tr>
+    <tr><td>Quotite : <td>
+        {% for p in intervention.interPrets %}
+            {{ p.quotite }}
+        {% endfor %}
+        </td></tr>
 </table>
 </body>
 </html>
