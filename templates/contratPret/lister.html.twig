@@ -11,30 +11,38 @@
 
 <table border="1">
     <tr>
-        <th>Nom élève</th>
-        <th>Prénom élève</th>
+        <th>Instrument</th>
+        <th>Type de l'instrument</th>
         <th>Date Début</th>
         <th>Date Fin</th>
-        <th>Attestation d'Assurance</th>
-        <th>État Détaillé Début</th>
-        <th>État Détaillé Retour</th>
+        <th>Nom élève</th>
+        <th>Prénom élève</th>
+        <th>Responsables</th>
 
     </tr>
 
     {% for c in pContratPret %}
         <tr>
-            {% if c.eleve %}
+            {% if c.instrument is defined %}
+
+                <td>{{ c.instrument.nom }}</td>
+                <td>{{ c.instrument.type.libelle }}</td>
+
+            {% endif %}
+
+                <td><a href="{{ path('ContratPretConsulter', { 'id': c.id }) }}">{{ c.dateDebut|date('d/m/Y') }}</td>
+                <td>{{ c.dateFin|date('d/m/Y')}}</td>
+
+            {% if c.eleve is defined %}
+
                 <td>{{ c.eleve.nom }}</td>
                 <td>{{ c.eleve.prenom }}</td>
-            {% else %}
-                <td>N/A</td>
-                <td>N/A</td>
+                <td>{% for responsable in c.eleve.responsables %}
+                        {{ responsable.nom }},
+                    {% endfor %}</td>
+
             {% endif %}
-            <td>{{ c.dateDebut|date('d/m/Y') }}</td>
-            <td>{{ c.dateFin|date('d/m/Y')}}</td>
-            <td>{{ c.attestationAssurance }}</td>
-            <td>{{ c.etatDetailleDebut }}</td>
-            <td>{{ c.etatDetailleRetour }}</td>
+
 
         </tr>
     {% endfor %}

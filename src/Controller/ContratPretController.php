@@ -6,6 +6,7 @@ use App\Entity\Etudiant;
 use App\Entity\Maison;
 use App\Form\ContratPretType;
 use App\Form\ContratPretModifierType;
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,12 +49,28 @@ class ContratPretController extends AbstractController
             'contratPret' => $contratPret,]);
     }
 
-    public function ajouterContratPret(){
+    public function ajouterContratPret(Request $request, PersistenceManagerRegistry $doctrine):Response{
 
         $contratPret = new contratPret();
         $form = $this->createForm(ContratPretType::class, $contratPret);
-        return $this->render('contratPret/ajouter.html.twig', array(
-            'form' => $form->createView(), ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $contratPret = $form->getData();
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($contratPret);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Contrat de pret created successfully!');
+            return $this->redirectToRoute('ContratPretlister');
+        }
+        else
+        {
+            return $this->render('contratPret/ajouter.html.twig', array('form' => $form->createView(),));
+        }
     }
 
     public function modifierContratPret(ManagerRegistry $doctrine, $id, Request $request){

@@ -51,6 +51,7 @@ class Instrument
     #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: ContratPret::class)]
     private Collection $contratPrets;
 
+
     #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: Intervention::class)]
     private Collection $interventions;
 
@@ -60,6 +61,7 @@ class Instrument
         $this->couleurs = new ArrayCollection();
         $this->contratPrets = new ArrayCollection();
         $this->interventions = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -244,7 +246,7 @@ class Instrument
         }
 
         return $this;
-    }
+
 
     /**
      * @return Collection<int, Intervention>
@@ -275,4 +277,5 @@ class Instrument
 
         return $this;
     }
+
 }

@@ -16,6 +16,7 @@ class ContratPretModifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('Instrument',EntityType::class, array ('class' => 'App\Entity\Instrument','choice_label' => 'nom' ))
             ->add('dateDebut',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
@@ -29,7 +30,7 @@ class ContratPretModifierType extends AbstractType
             ->add('etatDetailleRetour',TextType::class)
             ->add('eleve',EntityType::class, array('class' => 'App\Entity\Eleve','choice_label' => 'nom' ))
 
-            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier étudiant'))
+            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier contrat pret'))
         ;
     }
 

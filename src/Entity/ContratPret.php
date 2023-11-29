@@ -44,7 +44,7 @@ class ContratPret
     {
         $this->interPrets = new ArrayCollection();
     }
-
+  
     public function getId(): ?int
     {
         return $this->id;
