@@ -48,6 +48,9 @@ class Instrument
     #[ORM\ManyToMany(targetEntity: Couleur::class, inversedBy: 'instruments')]
     private Collection $couleurs;
 
+    #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: ContratPret::class)]
+    private Collection $contratPrets;
+
     #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: Intervention::class)]
     private Collection $interventions;
 
@@ -55,6 +58,7 @@ class Instrument
     {
         $this->accessoires = new ArrayCollection();
         $this->couleurs = new ArrayCollection();
+        $this->contratPrets = new ArrayCollection();
         $this->interventions = new ArrayCollection();
     }
 
@@ -208,6 +212,36 @@ class Instrument
     public function removeCouleur(Couleur $couleur): static
     {
         $this->couleurs->removeElement($couleur);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContratPret>
+     */
+    public function getContratPrets(): Collection
+    {
+        return $this->contratPrets;
+    }
+
+    public function addContratPret(ContratPret $contratPret): static
+    {
+        if (!$this->contratPrets->contains($contratPret)) {
+            $this->contratPrets->add($contratPret);
+            $contratPret->setInstrument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContratPret(ContratPret $contratPret): static
+    {
+        if ($this->contratPrets->removeElement($contratPret)) {
+            // set the owning side to null (unless already changed)
+            if ($contratPret->getInstrument() === $this) {
+                $contratPret->setInstrument(null);
+            }
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InterventionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,20 +16,32 @@ class Intervention
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDebut = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateFin = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $descriptif = null;
 
-    #[ORM\Column]
-    private ?int $prix = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'interventions')]
     private ?Instrument $instrument = null;
+
+    #[ORM\ManyToOne(inversedBy: 'interventions')]
+    private ?professionnel $professionnel = null;
+
+    #[ORM\OneToMany(mappedBy: 'intervention', targetEntity: InterPret::class)]
+    private Collection $interPrets;
+
+    public function __construct()
+    {
+        $this->interPrets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -39,7 +53,7 @@ class Intervention
         return $this->dateDebut;
     }
 
-    public function setDateDebut(\DateTimeInterface $dateDebut): static
+    public function setDateDebut(?\DateTimeInterface $dateDebut): static
     {
         $this->dateDebut = $dateDebut;
 
@@ -51,7 +65,7 @@ class Intervention
         return $this->dateFin;
     }
 
-    public function setDateFin(\DateTimeInterface $dateFin): static
+    public function setDateFin(?\DateTimeInterface $dateFin): static
     {
         $this->dateFin = $dateFin;
 
@@ -62,20 +76,20 @@ class Intervention
     {
         return $this->descriptif;
     }
-
-    public function setDescriptif(string $descriptif): static
+  
+    public function setDescriptif(?string $descriptif): static
     {
         $this->descriptif = $descriptif;
 
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix): static
+    public function setPrix(?float $prix): static
     {
         $this->prix = $prix;
 
@@ -90,6 +104,48 @@ class Intervention
     public function setInstrument(?Instrument $instrument): static
     {
         $this->instrument = $instrument;
+
+        return $this;
+    }
+  
+    public function getProfessionnel(): ?Professionnel
+    {
+        return $this->professionnel;
+    }
+
+    public function setProfessionnel(?Professionnel $professionnel): static
+    {
+        $this->professionnel = $professionnel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, InterPret>
+     */
+    public function getInterPrets(): Collection
+    {
+        return $this->interPrets;
+    }
+
+    public function addInterPret(InterPret $interPret): static
+    {
+        if (!$this->interPrets->contains($interPret)) {
+            $this->interPrets->add($interPret);
+            $interPret->setIntervention($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterPret(InterPret $interPret): static
+    {
+        if ($this->interPrets->removeElement($interPret)) {
+            // set the owning side to null (unless already changed)
+            if ($interPret->getIntervention() === $this) {
+                $interPret->setIntervention(null);
+            }
+        }
 
         return $this;
     }
