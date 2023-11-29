@@ -10,21 +10,33 @@
 {% block javascripts %}{% endblock %}
 
 LISTE DES INSTRUMENTS</br>
-<table>
+<table border="2px">
+
+    <tr>
+        <td>ID</td>
+        <td>NOM</td>
+        <td>MARQUE</td>
+        <td>TYPE</td>
+        <td>CLASSE</td>
+        <td>NUM SERIE</td>
+        <td>DATE D'ACHAT</td>
+        <td>PRIX D'ACHAT</td>
+        <td>UTILISATION</td>
+    </tr>
+    
     {% for instrument in pInstruments %}
+
         <tr>
-            <tr>
-                <td>Id : {{ instrument.id }}</td>
-                <td>Nom : <a href="{{ path('instrumentConsulter', { 'id': instrument.id }) }}">{{ instrument.nom }}</a></td>
-                <td>Marque de l'instrument : {{ instrument.marque.libelle }}</td>
-                <td>Type de l'instrument : {{ instrument.type.libelle }}</td>
-                <td>Classe de l'instrument : {{ instrument.type.classe.libelle }}</td>
-                <td>Numéro de série de l'instrument : {{ instrument.numSerie }}</td>
-                <td>Date d'achat de l'instrument : {{ instrument.dateAchat|date("d/m/Y") }}</td>
-                <td>Prix d'achat de l'instrument : {{ instrument.prixAchat }}</td>
-                <td>Utilisation de l'instrument : {{ instrument.utilisation }}</td>
-                <td></td>
-            </tr>
+            <td>{{ instrument.id }}</td>
+            <td><a href="{{ path('instrumentConsulter', { 'id': instrument.id }) }}">{{ instrument.nom }}</a></td>
+            <td>{{ instrument.marque.libelle }}</td>
+            <td>{{ instrument.type.libelle }}</td>
+            <td>{{ instrument.type.classe.libelle }}</td>
+            <td>{{ instrument.numSerie }}</td>
+            <td>{{ instrument.dateAchat|date("d/m/Y") }}</td>
+            <td>{{ instrument.prixAchat }} €</td>
+            <td>{{ instrument.utilisation }}</td>
+        </tr>
     {% else %}
         <tr>
             <td>Aucun etudiant n'a été trouvé.</td>

@@ -21,7 +21,10 @@ class InstrumentAjouterType extends AbstractType
     {
         $builder
             ->add('numSerie', TextType::class)
-            ->add('dateAchat', DateType::class)
+            ->add('dateAchat', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
             ->add('prixAchat', NumberType::class)
             ->add('utilisation', TextType::class)
             ->add('cheminImage', TextType::class)

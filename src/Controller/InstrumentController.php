@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Instrument;
-use App\Entity\Intervention;
 use App\Form\InstrumentModifierType;
 use App\Form\InstrumentAjouterType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -31,8 +30,13 @@ class InstrumentController extends AbstractController
             throw $this->createNotFoundException('Aucun etudiant trouvé avec le numéro '.$id);
         }
 
+        $interventions = $instrument->getInterventions();
+
         //return new Response('Etudiant : '.$etudiant->getNom());
-        return $this->render('instrument/consulter.html.twig', ['instrument' => $instrument,]);
+        return $this->render('instrument/consulter.html.twig', [
+            'instrument' => $instrument,
+            'pInterventions' => $interventions,
+            ]);
     }
 
     public function listerInstrument(ManagerRegistry $doctrine){
@@ -90,6 +94,10 @@ class InstrumentController extends AbstractController
                 return $this->render('instrument/ajouter.html.twig', array('form' => $form->createView(),));
             }
         }
+    }
+
+    public function supprimerInstrument(){
+
     }
 
 }

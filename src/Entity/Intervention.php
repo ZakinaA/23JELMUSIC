@@ -16,6 +16,7 @@ class Intervention
     #[ORM\Column]
     private ?int $id = null;
 
+
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDebut = null;
 
@@ -75,7 +76,7 @@ class Intervention
     {
         return $this->descriptif;
     }
-
+  
     public function setDescriptif(?string $descriptif): static
     {
         $this->descriptif = $descriptif;
@@ -106,7 +107,7 @@ class Intervention
 
         return $this;
     }
-
+  
     public function getProfessionnel(): ?Professionnel
     {
         return $this->professionnel;
