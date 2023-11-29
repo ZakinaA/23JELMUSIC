@@ -53,3 +53,11 @@ ContratPretAjouter:
 ContratPretModifier:
     path: /contratPret/modifier/{id}
     controller: App\Controller\ContratPretController::modifierContratPret
+
+Interventionlister:
+    path: /intervention/lister
+    controller: App\Controller\InterventionController::listerIntervention
+
+InterventionConulter:
+    path: /intervention/consulter/{id}
+    controller: App\Controller\InterventionController::consulterIntervention
