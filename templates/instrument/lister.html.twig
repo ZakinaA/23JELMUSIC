@@ -10,7 +10,7 @@
 {% block javascripts %}{% endblock %}
 
 LISTE DES INSTRUMENTS</br>
-<table>
+<table border="2px">
 
     <tr>
         <td>ID</td>
@@ -34,7 +34,7 @@ LISTE DES INSTRUMENTS</br>
             <td>{{ instrument.type.classe.libelle }}</td>
             <td>{{ instrument.numSerie }}</td>
             <td>{{ instrument.dateAchat|date("d/m/Y") }}</td>
-            <td>{{ instrument.prixAchat }}</td>
+            <td>{{ instrument.prixAchat }} €</td>
             <td>{{ instrument.utilisation }}</td>
         </tr>
     {% else %}

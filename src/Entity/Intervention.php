@@ -2,19 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\ContratPretRepository;
+use App\Repository\InterventionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ContratPretRepository::class)]
-class ContratPret
+#[ORM\Entity(repositoryClass: InterventionRepository::class)]
+class Intervention
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDebut = null;
@@ -23,28 +24,25 @@ class ContratPret
     private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $attestationAssurance = null;
+    private ?string $descriptif = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $etatDetailleDebut = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $prix = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $etatDetailleRetour = null;
-
-    #[ORM\ManyToOne(inversedBy: 'contratprets')]
-    private ?Eleve $eleve = null;
-
-    #[ORM\ManyToOne(inversedBy: 'contratPrets')]
+    #[ORM\ManyToOne(inversedBy: 'interventions')]
     private ?Instrument $instrument = null;
 
-    #[ORM\OneToMany(mappedBy: 'contratPret', targetEntity: InterPret::class)]
+    #[ORM\ManyToOne(inversedBy: 'interventions')]
+    private ?professionnel $professionnel = null;
+
+    #[ORM\OneToMany(mappedBy: 'intervention', targetEntity: InterPret::class)]
     private Collection $interPrets;
 
     public function __construct()
     {
         $this->interPrets = new ArrayCollection();
     }
-  
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,50 +72,26 @@ class ContratPret
         return $this;
     }
 
-    public function getAttestationAssurance(): ?string
+    public function getDescriptif(): ?string
     {
-        return $this->attestationAssurance;
+        return $this->descriptif;
     }
-
-    public function setAttestationAssurance(?string $attestationAssurance): static
+  
+    public function setDescriptif(?string $descriptif): static
     {
-        $this->attestationAssurance = $attestationAssurance;
+        $this->descriptif = $descriptif;
 
         return $this;
     }
 
-    public function getEtatDetailleDebut(): ?string
+    public function getPrix(): ?float
     {
-        return $this->etatDetailleDebut;
+        return $this->prix;
     }
 
-    public function setEtatDetailleDebut(?string $etatDetailleDebut): static
+    public function setPrix(?float $prix): static
     {
-        $this->etatDetailleDebut = $etatDetailleDebut;
-
-        return $this;
-    }
-
-    public function getEtatDetailleRetour(): ?string
-    {
-        return $this->etatDetailleRetour;
-    }
-
-    public function setEtatDetailleRetour(?string $etatDetailleRetour): static
-    {
-        $this->etatDetailleRetour = $etatDetailleRetour;
-
-        return $this;
-    }
-
-    public function getEleve(): ?Eleve
-    {
-        return $this->eleve;
-    }
-
-    public function setEleve(?Eleve $eleve): static
-    {
-        $this->eleve = $eleve;
+        $this->prix = $prix;
 
         return $this;
     }
@@ -130,6 +104,18 @@ class ContratPret
     public function setInstrument(?Instrument $instrument): static
     {
         $this->instrument = $instrument;
+
+        return $this;
+    }
+  
+    public function getProfessionnel(): ?Professionnel
+    {
+        return $this->professionnel;
+    }
+
+    public function setProfessionnel(?Professionnel $professionnel): static
+    {
+        $this->professionnel = $professionnel;
 
         return $this;
     }
@@ -146,7 +132,7 @@ class ContratPret
     {
         if (!$this->interPrets->contains($interPret)) {
             $this->interPrets->add($interPret);
-            $interPret->setContratPret($this);
+            $interPret->setIntervention($this);
         }
 
         return $this;
@@ -156,12 +142,11 @@ class ContratPret
     {
         if ($this->interPrets->removeElement($interPret)) {
             // set the owning side to null (unless already changed)
-            if ($interPret->getContratPret() === $this) {
-                $interPret->setContratPret(null);
+            if ($interPret->getIntervention() === $this) {
+                $interPret->setIntervention(null);
             }
         }
 
         return $this;
     }
-
 }
