@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Instrument;
 use App\Entity\Intervention;
+use App\Form\InstrumentAjouterType;
+use App\Form\InterventionAjoutType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,5 +45,26 @@ class InterventionController extends AbstractController
         //return new Response('Intervention : '.$Intervention->getNom());
         return $this->render('intervention/consulter.html.twig', [
             'intervention' => $intervention,]);
+    }
+
+    public function ajouterIntervention(ManagerRegistry $doctrine,Request $request){
+        $intervention = new Intervention();
+        $form = $this->createForm(InterventionAjoutType::class, $intervention);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $instrument = $form->getData();
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($intervention);
+            $entityManager->flush();
+
+            return $this->render('intervention/consulter.html.twig', ['intervention' => $intervention,]);
+        }
+        else
+        {
+            return $this->render('intervention/ajouter.html.twig', array('form' => $form->createView(),));
+        }
     }
 }
