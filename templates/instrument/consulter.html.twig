@@ -23,6 +23,7 @@
         <tr>
             <td>DATE DE DEBUT</td>
             <td>DATE DE FIN</td>
+            <td>Professionnel</td>
             <td>DESCRIPTIF</td>
             <td>PRIX</td>
         </tr>
@@ -34,7 +35,7 @@
             <tr>
                 <td>{{ intervention.dateDebut|date("d/m/Y") }}</td>
                 <td>{{ intervention.dateFin|date("d/m/Y") }}</td>
-{#                <td>{{ intervention.professionnel.nom }}</td>#}
+                <td>{{ intervention.professionnel.nom }} <br> {{ intervention.professionnel.numRue }} {{ intervention.professionnel.rue }} <br> {{ intervention.professionnel.copos }} {{ intervention.professionnel.ville }}</td>
                 <td>{{ intervention.descriptif }}</td>
                 <td>{{ intervention.prix }}</td>
 
