@@ -54,6 +54,11 @@ Interventionlister:
     path: /intervention/lister
     controller: App\Controller\InterventionController::listerIntervention
 
-InterventionConulter:
+InterventionConsulter:
     path: /intervention/consulter/{id}
     controller: App\Controller\InterventionController::consulterIntervention
+
+InterventionAjouter:
+    path: /intervention/ajouter
+    controller: App\Controller\InterventionController::ajouterIntervention
+
