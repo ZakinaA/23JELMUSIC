@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Instrument;
-use App\Entity\Intervention;
 use App\Form\InstrumentModifierType;
 use App\Form\InstrumentAjouterType;
 use Doctrine\Persistence\ManagerRegistry;
