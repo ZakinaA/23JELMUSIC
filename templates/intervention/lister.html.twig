@@ -11,9 +11,9 @@
 
 <table border="1">
     <tr>
+        <th>Descriptif</th>
         <th>Nom professionel</th>
         <th>Nom instrument</th>
-        <th>Descriptif</th>
         <th>Date Début</th>
         <th>Date Fin</th>
         <th>Prix</th>
@@ -22,14 +22,11 @@
 
     {% for i in pIntervention %}
         <tr>
+            <td><a href="{{ path('InterventionConsulter', { 'id': i.id }) }}">{{ i.descriptif }}</td>
             {% if i.professionnel is defined and i.instrument is defined %}
                 <td>{{ i.professionnel.nom }}</td>
                 <td>{{ i.instrument.nom }}</td>
-            {% else %}
-                <td>N/A</td>
-                <td>N/A</td>
             {% endif %}
-            <td>{{ i.descriptif }}</td>
             <td>{{ i.dateDebut|date('d/m/Y') }}</td>
             <td>{{ i.dateFin|date('d/m/Y')}}</td>
             <td>{{ i.prix }}</td>
