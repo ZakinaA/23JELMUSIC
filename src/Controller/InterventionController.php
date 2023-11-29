@@ -6,6 +6,7 @@ use App\Entity\Instrument;
 use App\Entity\Intervention;
 use App\Form\InstrumentAjouterType;
 use App\Form\InterventionAjoutType;
+use App\Form\InterventionModifierType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,6 +66,36 @@ class InterventionController extends AbstractController
         else
         {
             return $this->render('intervention/ajouter.html.twig', array('form' => $form->createView(),));
+        }
+    }
+
+    public function modifierIntervention(ManagerRegistry $doctrine, $id, Request $request){
+
+
+        $intervention = $doctrine->getRepository(Intervention::class)->find($id);
+
+        $repository = $doctrine->getRepository(Intervention::class);
+        $interventions = $repository->findAll();
+
+        if (!$intervention) {
+            throw $this->createNotFoundException('Aucune intervention trouvé avec le numéro '.$id);
+        }
+        else
+        {
+            $form = $this->createForm(InterventionModifierType::class, $intervention);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $intervention = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($intervention);
+                $entityManager->flush();
+                return $this->render('intervention/consulter.html.twig', ['intervention' => $intervention, 'pInterventions' => $interventions]);
+            }
+            else{
+                return $this->render('intervention/ajouter.html.twig', array('form' => $form->createView(),));
+            }
         }
     }
 }

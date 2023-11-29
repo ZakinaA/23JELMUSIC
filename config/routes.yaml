@@ -62,3 +62,6 @@ InterventionAjouter:
     path: /intervention/ajouter
     controller: App\Controller\InterventionController::ajouterIntervention
 
+InterventionModifier:
+    path: /intervention/modifier/{id}
+    controller: App\Controller\InterventionController::modifierIntervention
