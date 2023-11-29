@@ -11,37 +11,39 @@
 
 <table border="1">
     <tr>
-        <th>instrument</th>
+        <th>Instrument</th>
+        <th>Type de l'instrument</th>
         <th>Date Début</th>
         <th>Date Fin</th>
         <th>Nom élève</th>
         <th>Prénom élève</th>
+        <th>Responsables</th>
 
     </tr>
 
     {% for c in pContratPret %}
         <tr>
-            {% if c.eleve is defined and c.instrument is defined %}
+            {% if c.instrument is defined %}
 
                 <td>{{ c.instrument.nom }}</td>
+                <td>{{ c.instrument.type.libelle }}</td>
 
-            {% else %}
-                <td>N/A</td>
-                <td>N/A</td>
             {% endif %}
 
                 <td><a href="{{ path('ContratPretConsulter', { 'id': c.id }) }}">{{ c.dateDebut|date('d/m/Y') }}</td>
                 <td>{{ c.dateFin|date('d/m/Y')}}</td>
 
-            {% if c.eleve is defined%}
+            {% if c.eleve is defined %}
 
                 <td>{{ c.eleve.nom }}</td>
                 <td>{{ c.eleve.prenom }}</td>
+                <td>{% for responsable in c.eleve.responsables %}
+                        {{ responsable.nom }},
+                    {% endfor %}</td>
 
-            {% else %}
-                <td>N/A</td>
-                <td>N/A</td>
             {% endif %}
+
+
         </tr>
     {% endfor %}
 
