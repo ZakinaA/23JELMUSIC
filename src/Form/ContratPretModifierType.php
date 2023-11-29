@@ -29,7 +29,7 @@ class ContratPretModifierType extends AbstractType
             ->add('etatDetailleRetour',TextType::class)
             ->add('eleve',EntityType::class, array('class' => 'App\Entity\Eleve','choice_label' => 'nom' ))
 
-            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier étudiant'))
+            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier contrat pret'))
         ;
     }
 
