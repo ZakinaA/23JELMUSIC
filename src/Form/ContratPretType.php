@@ -10,6 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class ContratPretType extends AbstractType
 {
@@ -26,8 +29,34 @@ class ContratPretType extends AbstractType
                 'format' => 'yyyy-MM-dd',
             ])
             ->add('attestationAssurance',TextType::class)
-            ->add('etatDetailleDebut', TextType::class)
-            ->add('etatDetailleRetour',TextType::class)
+            ->add('etatDetailleDebut', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'min' => 4,
+                        'max' => 50,
+                        'minMessage' => 'La description doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[A-Za-z0-9\s]+$/',
+                        'message' => 'Seules les lettres, les chiffres et les espaces sont autorisés.',
+                    ]),
+
+                ],
+            ])
+            ->add('etatDetailleRetour',TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'max' => 50,
+                        'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[A-Za-z0-9\s]+$/',
+                        'message' => 'Seules les lettres, les chiffres et les espaces sont autorisés.',
+                    ]),
+
+                ],
+            ])
             ->add('eleve',EntityType::class, array('class' => 'App\Entity\Eleve','choice_label' => 'nom' ))
 
             ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel étudiant'))
