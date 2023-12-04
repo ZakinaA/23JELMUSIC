@@ -9,19 +9,18 @@
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 
-<h5>PAGE DE CONSULTATION D'UN COURS</h5>
-<p>
-<table>
-    <tr><td>Professeur :</td><td>{{cours.professeur.nom}}</td><td>{{cours.professeur.prenom}}</td></tr>
-    <tr><td>Id : </td><td>{{cours.id}} </td></tr>
+<h4>PAGE DE CONSULTATION D'UN COURS :</h4>
+<table border="2px">
+    <tr><td>Professeur :</td><td>{{cours.professeur.nom}} {{cours.professeur.prenom}}</td></tr>
     <tr><td>Libelle : </td><td>{{cours.libelle}}</td>
-    <tr><td>Age Minimum : </td><td>{{cours.agemini}}</td></tr>
-    <tr><td>Heure de début : </td><td>{{cours.heuredebut|date('H:i:s')}}</td></tr>
-    <tr><td>Heure de fin : </td><td>{{cours.heurefin|date('H:i:s')}}</td></tr>
-    <tr><td>Nombre de places : </td><td>{{cours.nbplaces}}</td></tr>
-    <tr><td>Age Maximum : </td><td>{{cours.agemaxi}}</td></tr>
+    <tr><td>Age Minimum : </td><td>{{cours.agemini}} ans</td></tr>
+    <tr><td>Age Maximum : </td><td>{{cours.agemaxi}} ans</td></tr>
+    <tr><td>Heure de début : </td><td>{{cours.heuredebut|date('H:i')}}</td></tr>
+    <tr><td>Heure de fin : </td><td>{{cours.heurefin|date('H:i')}}</td></tr>
+    <tr><td>Places : </td><td>{{cours.nbplaces}}</td></tr>
+    <tr><td>Type d'instrument : </td><td><a href="{{ path('instrumentConsulter', { 'id': cours.typeInstruments.id }) }}">{{cours.typeInstruments.libelle}}</a></td></tr>
 </table>
-<h5>Liste des elèves inscrits :</h5>
+<h4>Liste des elèves inscrits :</h4>
 <ul>
     {% for inscription in eleveInscrits %}
         <li>{{inscription.eleve.nom}} {{inscription.eleve.prenom}}</li>
