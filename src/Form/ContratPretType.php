@@ -65,7 +65,7 @@ class ContratPretType extends AbstractType
             ])
 
 
-            ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel étudiant'))
+            ->add('enregistrer', SubmitType::class, array('label' => 'Ajout du prêt'))
         ;
     }
 
