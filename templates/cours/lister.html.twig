@@ -10,21 +10,25 @@
 {% block javascripts %}{% endblock %}
 
 <h5>LISTE DES COURS :</h5>
-<table>
+<table border="2px">
+    <tr>
+        <td>Instrument</td>
+        <td>Jours du cours</td>
+        <td>Heure de début</td>
+        <td>Heure de fin</td>
+        <td>Âge maximum</td>
+        <td>Âge minimum</td>
+        <td>Nombre de place</td>
+    </tr>
+
     {% for c in pCours %}
+
         <tr>
-            <td>Jours du cours</td>
-            <td>Heure de début</td>
-            <td>Heure de fin</td>
-            <td>Libelle du cours</td>
-            <td>Âge minimum</td>
-            <td>Nombre de place dans le cours</td>
-        </tr>
-        <tr>
+        <td><a href="{{ path('coursConsulter', { 'id': c.id }) }}">{{ c.typeInstruments.libelle }}</a></td>
         <td>{{c.jours.libelle}}</td>
-        <td>{{c.heuredebut|date('H:i:s')}}</td>
-        <td>{{c.heurefin|date('H:i:s')}}</td>
-        <td><a href="{{ path('coursConsulter', { 'id': c.id }) }}">{{ c.libelle }}</a></td>
+        <td>{{c.heuredebut|date('H:i')}}</td>
+        <td>{{c.heurefin|date('H:i')}}</td>
+        <td>{{c.agemaxi}}</a></td>
         <td>{{c.agemini}}</a></td>
         <td>{{c.nbplaces}}</td>
     {% else %}
