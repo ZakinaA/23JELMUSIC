@@ -25,10 +25,12 @@ class InterventionModifierType extends AbstractType
             ->add('DateDebut',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false,
             ])
             ->add('DateFin',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false,
             ])
             ->add('Descriptif', TextType::class, [
                 'constraints' => [
@@ -44,6 +46,7 @@ class InterventionModifierType extends AbstractType
                     ]),
 
                 ],
+                'required' => false,
             ])
 
             ->add('Prix', NumberType::class, [
@@ -53,9 +56,11 @@ class InterventionModifierType extends AbstractType
                         'message' => 'Le prix ne peut pas être négatif.',
                     ]),
                 ],
+                'required' => false,
             ])
 
-            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier l intervention'))
+
+            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier l\'intervention'))
         ;
     }
 
