@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
 class Cours
@@ -20,18 +21,43 @@ class Cours
     private ?string $libelle = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Regex(pattern:"/^\d+$/", message:"Veuillez saisir uniquement des chiffres.")]
+    #[Assert\Range(
+        notInRangeMessage: "L'age ne doit pas être plus être plus petit que 3 ans et plus grand que 99 ans",
+        min: 3,
+        max: 99)]
+    #[Assert\Expression('this.getAgeMini() < this.getAgeMaxi()',
+        message:"L'age minimum ne peux pas être supérieur à l'age maximum.")]
     private ?string $AgeMini = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotBlank()]
+    #[Assert\Expression('this.getHeureDebut() < this.getHeureFin()',
+        message:"L'heure de début ne peut pas être supérieure à l'heure de fin.")]
+    #[Assert\LessThan('07:00',
+        message: 'L\'heure de début doit être supérieur à 7h'),]
     private ?\DateTimeInterface $HeureDebut = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotBlank()]
+    #[Assert\Expression('this.getHeureDebut() < this.getHeureFin()',
+        message:"L'heure de fin ne peut pas être antérieure à l'heure de début.")]
+    #[Assert\LessThan('07:00',
+        message: 'L\'heure de fin doit être supérieur à 7h'),]
     private ?\DateTimeInterface $HeureFin = null;
 
     #[ORM\Column]
+    #[Assert\Positive(message:"Le nombre de places doit être supérieur à zéro.")]
     private ?int $NbPlaces = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Regex(pattern:"/^\d+$/", message:"Veuillez saisir uniquement des chiffres.")]
+    #[Assert\Range(
+        notInRangeMessage: "L'age ne doit pas être plus être plus petit que 3 ans et plus grand que 99 ans",
+        min: 3,
+        max: 99)]
+    #[Assert\Expression('this.getAgeMini() < this.getAgeMaxi()',
+        message:"L'age minimum ne peux pas être supérieur à l'age maximum.")]
     private ?string $AgeMaxi = null;
 
     #[ORM\ManyToOne(inversedBy: 'cours')]
@@ -45,6 +71,9 @@ class Cours
 
     #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Inscription::class)]
     private Collection $inscriptions;
+
+    #[ORM\ManyToOne(inversedBy: 'cours')]
+    private ?TypeInstrument $typeInstruments = null;
 
     public function __construct()
     {
@@ -190,6 +219,18 @@ class Cours
                 $inscription->setCours(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTypeInstruments(): ?TypeInstrument
+    {
+        return $this->typeInstruments;
+    }
+
+    public function setTypeInstruments(?TypeInstrument $typeInstruments): static
+    {
+        $this->typeInstruments = $typeInstruments;
 
         return $this;
     }

@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Cours;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,9 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
-class CoursType extends AbstractType
+class CoursModifierType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -42,18 +41,15 @@ class CoursType extends AbstractType
                 ],
             ])
             ->add('AgeMini', TextType::class)
-            ->add('AgeMaxi', TextType::class)
+            ->add('AgeMaxi',TextType::class)
             ->add('NbPlaces', IntegerType::class)
-            ->add('typeCours', EntityType::class, [
-                'class' => 'App\Entity\TypeCours',
-                'choice_label' => 'libelle',
-                'constraints' => [
-                    new Assert\Callback(['callback' => [$this, 'validateNbPlacesAndTypeCours']]),
-                ],
-            ])
+            ->add('typeCours', EntityType::class, array('class' => 'App\Entity\TypeCours', 'choice_label' => 'libelle'))
             ->add('professeur', EntityType::class, array('class' => 'App\Entity\Professeur','choice_label' => 'nom' ))
-            ->add('save', SubmitType::class, array('label' => 'Créer un cours'));
-        ;
+            ->add('save', SubmitType::class, array('label' => 'Modifier un cours'));
+    }
+
+    public function getParent(){
+        return CoursType::class;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
