@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class InterventionModifierType extends AbstractType
 {
@@ -27,8 +30,31 @@ class InterventionModifierType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
-            ->add('Descriptif', TextType::class)
-            ->add('Prix', NumberType::class)
+            ->add('Descriptif', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'min' => 10,
+                        'max' => 100,
+                        'minMessage' => 'La description doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[A-Za-z0-9\s]+$/',
+                        'message' => 'Seules les lettres, les chiffres et les espaces sont autorisés.',
+                    ]),
+
+                ],
+            ])
+
+            ->add('Prix', NumberType::class, [
+                'constraints' => [
+                    new GreaterThanOrEqual([
+                        'value' => 0,
+                        'message' => 'Le prix ne peut pas être négatif.',
+                    ]),
+                ],
+            ])
+
             ->add('enregistrer', SubmitType::class, array('label' => 'Modifier l intervention'))
         ;
     }
