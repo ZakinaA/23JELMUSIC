@@ -28,7 +28,7 @@
         <br>
         <br>
 
-        {% for intervention in pInterventions %}
+        {% for intervention in instrument.interventions %}
             <tr style="text-align: center">
                 <td>{{ intervention.dateDebut|date("d/m/Y") }}</td>
                 <td>{{ intervention.dateFin|date("d/m/Y") }}</td>

@@ -30,12 +30,9 @@ class InstrumentController extends AbstractController
             throw $this->createNotFoundException('Aucun etudiant trouvé avec le numéro '.$id);
         }
 
-        $interventions = $instrument->getInterventions();
-
         //return new Response('Etudiant : '.$etudiant->getNom());
         return $this->render('instrument/consulter.html.twig', [
             'instrument' => $instrument,
-            'pInterventions' => $interventions,
             ]);
     }
 
