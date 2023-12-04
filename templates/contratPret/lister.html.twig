@@ -11,21 +11,29 @@
 
 <table border="1">
     <tr>
+        <th>Elèves</th>
+        <th>Responsables</th>
         <th>Instrument</th>
         <th>Type de l'instrument</th>
         <th>Date Début</th>
         <th>Date Fin</th>
-        <th>Nom élève</th>
-        <th>Prénom élève</th>
-        <th>Responsables</th>
+
 
     </tr>
 
     {% for c in pContratPret %}
         <tr>
+            {% if c.eleve is defined %}
+
+                <td><a href="{{ path('ContratPretConsulter', { 'id': c.id }) }}">{{ c.eleve.nom }} {{ c.eleve.prenom }}</td>
+                <td>{% for responsable in c.eleve.responsables %}
+                        {{ responsable.nom }} {{  responsable.prenom }}<br>
+                    {% endfor %}</td>
+
+            {% endif %}
             {% if c.instrument is defined %}
 
-                <td><a href="{{ path('ContratPretConsulter', { 'id': c.id }) }}">{{ c.instrument.nom }}</td>
+                <td>{{ c.instrument.nom }} (serie{{ c.instrument.numserie }})</td>
                 <td>{{ c.instrument.type.libelle }}</td>
 
             {% endif %}
@@ -33,15 +41,7 @@
                 <td>{{ c.dateDebut|date('d/m/Y') }}</td>
                 <td>{{ c.dateFin|date('d/m/Y')}}</td>
 
-            {% if c.eleve is defined %}
 
-                <td>{{ c.eleve.nom }}</td>
-                <td>{{ c.eleve.prenom }}</td>
-                <td>{% for responsable in c.eleve.responsables %}
-                        {{ responsable.nom }},
-                    {% endfor %}</td>
-
-            {% endif %}
 
 
         </tr>
