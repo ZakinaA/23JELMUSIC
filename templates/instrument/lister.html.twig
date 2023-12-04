@@ -20,6 +20,7 @@ LISTE DES INSTRUMENTS</br>
         <td>DATE D'ACHAT</td>
         <td>PRIX D'ACHAT</td>
         <td>UTILISATION</td>
+        <td>COULEURS</td>
     </tr>
     
     {% for instrument in pInstruments %}
@@ -32,6 +33,11 @@ LISTE DES INSTRUMENTS</br>
             <td>{{ instrument.dateAchat|date("d/m/Y") }}</td>
             <td>{{ instrument.prixAchat }} €</td>
             <td>{{ instrument.utilisation }}</td>
+            {% for couleur in instrument.couleurs %}
+                <td>{{ couleur.nom | default('N/A') }}</td>
+            {% endfor %}
+
+
         </tr>
     {% else %}
         <tr>
