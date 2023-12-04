@@ -15,7 +15,6 @@ LISTE DES INSTRUMENTS</br>
     <tr>
         <td>NOM</td>
         <td>MARQUE</td>
-        <td>TYPE</td>
         <td>CLASSE</td>
         <td>NUM SERIE</td>
         <td>DATE D'ACHAT</td>
@@ -26,9 +25,8 @@ LISTE DES INSTRUMENTS</br>
     {% for instrument in pInstruments %}
 
         <tr>
-            <td><a href="{{ path('instrumentConsulter', { 'id': instrument.id }) }}">{{ instrument.nom }}</a></td>
+            <td><a href="{{ path('instrumentConsulter', { 'id': instrument.id }) }}">{{ instrument.type.libelle }} : {{ instrument.nom }}</a></td>
             <td>{{ instrument.marque.libelle }}</td>
-            <td>{{ instrument.type.libelle }}</td>
             <td>{{ instrument.type.classe.libelle }}</td>
             <td>{{ instrument.numSerie }}</td>
             <td>{{ instrument.dateAchat|date("d/m/Y") }}</td>
