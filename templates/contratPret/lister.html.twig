@@ -1,61 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+{% extends 'base.html.twig' %}
+
+{% block title %}Lister{% endblock %}
     {% block stylesheets %}{% endblock %}
-</head>
-<body>
+{% block body %}
 
-<h2>LISTE DES CONTRATS DE PRÊT</h2>
+<div class="card-body p-4">
+    <h5 class="card-title fw-semibold mb-4">LISTE DES CONTRATS DE PRÊT</h5>
+    <div class="table-responsive">
+        <table class="table text-nowrap mb-0 align-middle">
+            <thead class="text-dark fs-4">
+            <tr>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Elèves</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Responsables</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Instrument</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Type de l'instrument</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Date Début</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Date Fin</h6>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for c in pContratPret %}
+                <tr>
+                    {% if c.eleve is defined %}
 
-<table border="1">
-    <tr>
-        <th>Elèves</th>
-        <th>Responsables</th>
-        <th>Instrument</th>
-        <th>Type de l'instrument</th>
-        <th>Date Début</th>
-        <th>Date Fin</th>
+                        <td><a href="{{ path('ContratPretConsulter', { 'id': c.id }) }}">{{ c.eleve.nom }} {{ c.eleve.prenom }}</td>
+                        <td>{% for responsable in c.eleve.responsables %}
+                                {{ responsable.nom }} {{  responsable.prenom }}<br>
+                            {% endfor %}</td>
+
+                    {% endif %}
+                    {% if c.instrument is defined %}
+
+                        <td>{{ c.instrument.nom }} (serie{{ c.instrument.numserie }})</td>
+                        <td>{{ c.instrument.type.libelle }}</td>
+
+                    {% endif %}
+
+                    <td>{{ c.dateDebut|date('d/m/Y') }}</td>
+                    <td>{{ c.dateFin|date('d/m/Y')}}</td>
 
 
-    </tr>
 
-    {% for c in pContratPret %}
-        <tr>
-            {% if c.eleve is defined %}
 
-                <td><a href="{{ path('ContratPretConsulter', { 'id': c.id }) }}">{{ c.eleve.nom }} {{ c.eleve.prenom }}</td>
-                <td>{% for responsable in c.eleve.responsables %}
-                        {{ responsable.nom }} {{  responsable.prenom }}<br>
-                    {% endfor %}</td>
+                </tr>
+            {% endfor %}
 
+            {% if pContratPret is empty %}
+                <tr>
+                    <td colspan="8">Aucun contrat de prêt n'a été trouvé.</td>
+                </tr>
             {% endif %}
-            {% if c.instrument is defined %}
 
-                <td>{{ c.instrument.nom }} (serie{{ c.instrument.numserie }})</td>
-                <td>{{ c.instrument.type.libelle }}</td>
-
-            {% endif %}
-
-                <td>{{ c.dateDebut|date('d/m/Y') }}</td>
-                <td>{{ c.dateFin|date('d/m/Y')}}</td>
-
-
-
-
-        </tr>
-    {% endfor %}
-
-    {% if pContratPret is empty %}
-        <tr>
-            <td colspan="8">Aucun contrat de prêt n'a été trouvé.</td>
-        </tr>
-    {% endif %}
-</table>
-
+            </tbody>
+        </table>
+{% endblock %}
 {% block javascripts %}{% endblock %}
 
-</body>
-</html>
 

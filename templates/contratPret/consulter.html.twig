@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'base.html.twig' %}
 
-</head>
-<body>
+{% block title %}Consulter{% endblock %}
+
+{% block body %}
 <h3>Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}) de type {{contratPret.instrument.type.libelle}}</h3>
 <p>
 <table >
@@ -20,6 +19,5 @@
     <tr><td>Attestation d'assurance : </td><td>{{contratPret.Attestationassurance}} </td></tr>
 
 </table>
-</body>
-</html>
+{% endblock %}
 
