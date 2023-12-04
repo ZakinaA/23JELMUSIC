@@ -246,7 +246,7 @@ class Instrument
         }
 
         return $this;
-
+    }
 
     /**
      * @return Collection<int, Intervention>
