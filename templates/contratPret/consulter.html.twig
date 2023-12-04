@@ -4,7 +4,7 @@
 
 </head>
 <body>
-<h3>Pret de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}) de type {{contratPret.instrument.type.libelle}}</h3>
+<h3>Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}) de type {{contratPret.instrument.type.libelle}}</h3>
 <p>
 <table >
 
@@ -15,8 +15,8 @@
                 {{ responsable.nom }} {{ responsable.prenom }},
             {% endfor %}
         </td>
-    <tr><td>Date de debut : </td><td>{{contratPret.datedebut|date("d/m/Y")}} etat de l'instrument : {{contratPret.etatdetailledebut}} </td></tr>
-    <tr><td>Date de fin : </td><td>{{contratPret.datefin|date("d/m/Y")}} etat de l'instrument : {{contratPret.etatdetailleretour}}</td></tr>
+    <tr><td>Date de debut : </td><td>{{contratPret.datedebut|date("d/m/Y")}} état de l'instrument : {{contratPret.etatdetailledebut}} </td></tr>
+    <tr><td>Date de fin : </td><td>{{contratPret.datefin|date("d/m/Y")}} état de l'instrument : {{contratPret.etatdetailleretour}}</td></tr>
     <tr><td>Attestation d'assurance : </td><td>{{contratPret.Attestationassurance}} </td></tr>
 
 </table>

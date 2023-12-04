@@ -19,16 +19,21 @@ class ContratPretType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('eleve',EntityType::class, array('class' => 'App\Entity\Eleve','choice_label' => 'nom' ))
             ->add('Instrument',EntityType::class, array ('class' => 'App\Entity\Instrument','choice_label' => 'nom' ))
             ->add('dateDebut',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+
             ])
             ->add('dateFin',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false,
             ])
-            ->add('attestationAssurance',TextType::class)
+            ->add('attestationAssurance', TextType::class, [
+                'required' => false,
+            ])
             ->add('etatDetailleDebut', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -56,8 +61,9 @@ class ContratPretType extends AbstractType
                     ]),
 
                 ],
+                'required' => false,
             ])
-            ->add('eleve',EntityType::class, array('class' => 'App\Entity\Eleve','choice_label' => 'nom' ))
+
 
             ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel étudiant'))
         ;
