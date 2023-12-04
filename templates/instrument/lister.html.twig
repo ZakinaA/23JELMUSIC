@@ -13,7 +13,6 @@ LISTE DES INSTRUMENTS</br>
 <table border="2px" style="text-align: center">
 
     <tr>
-        <td>ID</td>
         <td>NOM</td>
         <td>MARQUE</td>
         <td>TYPE</td>
@@ -27,7 +26,6 @@ LISTE DES INSTRUMENTS</br>
     {% for instrument in pInstruments %}
 
         <tr>
-            <td>{{ instrument.id }}</td>
             <td><a href="{{ path('instrumentConsulter', { 'id': instrument.id }) }}">{{ instrument.nom }}</a></td>
             <td>{{ instrument.marque.libelle }}</td>
             <td>{{ instrument.type.libelle }}</td>
