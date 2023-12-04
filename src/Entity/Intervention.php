@@ -33,7 +33,7 @@ class Intervention
     private ?Instrument $instrument = null;
 
     #[ORM\ManyToOne(inversedBy: 'interventions')]
-    private ?professionnel $professionnel = null;
+    private ?Professionnel $professionnel = null;
 
     #[ORM\OneToMany(mappedBy: 'intervention', targetEntity: InterPret::class)]
     private Collection $interPrets;
