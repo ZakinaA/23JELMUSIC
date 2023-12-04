@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContratPretRepository::class)]
 class ContratPret
@@ -17,10 +18,19 @@ class ContratPret
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\Expression(
+        "this.getDateDebut() < this.getDateFin()",
+        message : "La date de début ne peut pas être supérieure à la date de fin"
+    )]
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\Expression(
+        "this.getDateDebut() < this.getDateFin()",
+        message : "La date de fin ne peut pas être antérieure à la date de début"
+    )]
     private ?\DateTimeInterface $dateFin = null;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $attestationAssurance = null;
