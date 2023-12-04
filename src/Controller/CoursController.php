@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Form\CoursModifierType;
 use App\Form\CoursType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,24 +52,52 @@ class CoursController extends AbstractController
     }
 
     //#[Route('/cours/ajouter', name: 'coursAjouter')]
-    public function ajouterCours(Request $request, PersistenceManagerRegistry $doctrine):Response
+    public function ajouterCours(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $cours = new cours();
+        $cours = new Cours();
         $form = $this->createForm(CoursType::class, $cours);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $doctrine->getManager();
             $entityManager->persist($cours);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Cours created successfully!');
+            $this->addFlash('success', 'Cours créé avec succès!');
             return $this->redirectToRoute('coursLister');
         }
 
         return $this->render('cours/ajouter.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    public function modifierCours(ManagerRegistry $doctrine, $id, Request $request){
+
+        $cours = $doctrine->getRepository(Cours::class)->find($id);
+
+        $repository = $doctrine->getRepository(Cours::class);
+        //$cours = $repository->findAll();
+
+        if (!$cours) {
+            throw $this->createNotFoundException('Aucun cours trouvé avec le numéro '.$id);
+        }
+        else
+        {
+            $form = $this->createForm(CoursModifierType::class, $cours);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $cours = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($cours);
+                $entityManager->flush();
+                return $this->redirectToRoute("coursLister");
+            }
+            else{
+                return $this->render('cours/ajouter.html.twig', array('form' => $form->createView(),));
+            }
+        }
     }
 }
