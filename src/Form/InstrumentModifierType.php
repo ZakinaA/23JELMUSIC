@@ -17,17 +17,16 @@ class InstrumentModifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('numSerie', TextType::class)
+            ->add('nom', TextType::class)
+            ->add('type', EntityType::class, array('class' => 'App\Entity\TypeInstrument', 'choice_label' => 'libelle'))
+            ->add('marque', EntityType::class, array('class' => 'App\Entity\Marque', 'choice_label' => 'libelle'))
+            ->add('utilisation', TextType::class)
             ->add('dateAchat', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
             ->add('prixAchat', NumberType::class)
-            ->add('utilisation', TextType::class)
-            ->add('cheminImage', TextType::class)
-            ->add('nom', TextType::class)
-            ->add('marque', EntityType::class, array('class' => 'App\Entity\Marque', 'choice_label' => 'libelle'))
-            ->add('type', EntityType::class, array('class' => 'App\Entity\TypeInstrument', 'choice_label' => 'libelle'))
+            ->add('numSerie', TextType::class)
             ->add('enregistrer', SubmitType::class, array('label' => 'Modifier Instrument'));
         ;
     }
