@@ -19,18 +19,17 @@ class ContratPret
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Assert\Expression(
-        "this.getDateDebut() < this.getDateFin()",
-        message : "La date de début ne peut pas être supérieure à la date de fin"
+        "this.getDateFin() === null or this.getDateDebut() < this.getDateFin()",
+        message: "La date de début ne peut pas être supérieure à la date de fin"
     )]
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Assert\Expression(
-        "this.getDateDebut() < this.getDateFin()",
-        message : "La date de fin ne peut pas être antérieure à la date de début"
+        "this.getDateDebut() === null or this.getDateFin() === null or this.getDateDebut() < this.getDateFin()",
+        message: "La date de fin ne peut pas être antérieure à la date de début"
     )]
     private ?\DateTimeInterface $dateFin = null;
-
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $attestationAssurance = null;

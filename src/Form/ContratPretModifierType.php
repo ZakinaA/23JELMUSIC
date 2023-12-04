@@ -18,16 +18,21 @@ class ContratPretModifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('eleve',EntityType::class, array('class' => 'App\Entity\Eleve','choice_label' => 'nom' ))
             ->add('Instrument',EntityType::class, array ('class' => 'App\Entity\Instrument','choice_label' => 'nom' ))
             ->add('dateDebut',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+
             ])
             ->add('dateFin',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false,
             ])
-            ->add('attestationAssurance',TextType::class)
+            ->add('attestationAssurance', TextType::class, [
+                'required' => false,
+            ])
             ->add('etatDetailleDebut', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -37,7 +42,7 @@ class ContratPretModifierType extends AbstractType
                         'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                     new Regex([
-                        'pattern' => '/^[A-Za-z0-9\s]+$/',
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s]+$/u',
                         'message' => 'Seules les lettres, les chiffres et les espaces sont autorisés.',
                     ]),
 
@@ -50,15 +55,16 @@ class ContratPretModifierType extends AbstractType
                         'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                     new Regex([
-                        'pattern' => '/^[A-Za-z0-9\s]+$/',
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s]+$/u',
                         'message' => 'Seules les lettres, les chiffres et les espaces sont autorisés.',
                     ]),
 
                 ],
+                'required' => false,
             ])
-            ->add('eleve',EntityType::class, array('class' => 'App\Entity\Eleve','choice_label' => 'nom' ))
 
-            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier contrat pret'))
+
+            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier le prêt'))
         ;
     }
 
