@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-</head>git
+</head>
 <body>
     <h5>PAGE DE CONSULTATION D'UN INSTRUMENT</h5>
     <p>
     <table border="2px">
-        <tr><td>Nom : </td><td> {{instrument.type.libelle}} : {{instrument.Nom}}</td>
-        <tr><td>Marque de l'instrument : </td><td>{{instrument.marque.libelle}}</td></tr>
-
-        <tr><td  rowspan="8" class="imgEtu">
-                {% set photo = 'img/etudiant/'~ etudiant.id ~'.jpg' %}
-                <span class="zoom"><img src="{{ asset(photo | trans )}}" title="{{ etudiant.prenom ~ " " ~ etudiant.nom }}" alt="{{ etudiant.prenom ~ " " ~ etudiant.nom }}"/></span></td></tr>
-
-        <tr><td>numéro de série de l'instrument : </td><td>{{instrument.numSerie}}</td></tr>
-        <tr><td>Date d'achat de l'instrument : </td><td>{{instrument.dateAchat|date("d/m/Y")}}</td></tr>
-        <tr><td>Prix d'achat de l'instrument : </td><td>{{instrument.prixAchat}} €</td></tr>
-        <tr><td>Utilisation de l'instrument : </td><td>{{instrument.utilisation}}</td></tr>
+        <tr><td style="text-align: center">Nom : </td><td style="text-align: center"> {{instrument.type.libelle}} : {{instrument.Nom}}</td><td  rowspan="8">{% set photo = 'img/' ~  instrument.type.libelle  ~ '.jpg' %}<span class="zoom"><img  style="height: 200px; width: 200px;" src="{{ asset(photo | trans )}}" alt="{{ instrument.type.classe.libelle ~ " " ~ instrument.type.libelle }}"/></span></td>
+        <tr><td style="text-align: center">Marque : </td><td style="text-align: center">{{instrument.marque.libelle}}</td></tr>
+        <tr><td style="text-align: center">numéro de série : </td><td style="text-align: center">{{instrument.numSerie}}</td></tr>
+        <tr><td style="text-align: center">Date d'achat : </td><td style="text-align: center">{{instrument.dateAchat|date("d/m/Y")}}</td></tr>
+        <tr><td style="text-align: center">Prix d'achat : </td><td style="text-align: center">{{instrument.prixAchat}} €</td></tr>
+        <tr><td style="text-align: center">Utilisation : </td><td style="text-align: center">{{instrument.utilisation}}</td></tr>
     </table>
 
     <br>
 
     <table border="2px">
-        <tr>
+        <tr style="text-align: center">
             <td>DATE DE DEBUT</td>
             <td>DATE DE FIN</td>
-            <td>Professionnel</td>
+            <td>PROFESSIONNEL</td>
             <td>DESCRIPTIF</td>
             <td>PRIX</td>
         </tr>
@@ -35,7 +29,7 @@
         <br>
 
         {% for intervention in pInterventions %}
-            <tr>
+            <tr style="text-align: center">
                 <td>{{ intervention.dateDebut|date("d/m/Y") }}</td>
                 <td>{{ intervention.dateFin|date("d/m/Y") }}</td>
                 <td>{{ intervention.professionnel.nom }} <br> {{ intervention.professionnel.numRue }} {{ intervention.professionnel.rue }} <br> {{ intervention.professionnel.copos }} {{ intervention.professionnel.ville }}</td>
