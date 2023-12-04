@@ -42,7 +42,7 @@ class ContratPretModifierType extends AbstractType
                         'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                     new Regex([
-                        'pattern' => '/^[A-Za-z0-9\s]+$/',
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s]+$/u',
                         'message' => 'Seules les lettres, les chiffres et les espaces sont autorisés.',
                     ]),
 
@@ -55,13 +55,14 @@ class ContratPretModifierType extends AbstractType
                         'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                     new Regex([
-                        'pattern' => '/^[A-Za-z0-9\s]+$/',
+                        'pattern' => '/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s]+$/u',
                         'message' => 'Seules les lettres, les chiffres et les espaces sont autorisés.',
                     ]),
 
                 ],
                 'required' => false,
             ])
+
 
             ->add('enregistrer', SubmitType::class, array('label' => 'Modifier le prêt'))
         ;
