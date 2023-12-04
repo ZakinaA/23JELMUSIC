@@ -9,6 +9,11 @@
     <table border="2px">
         <tr><td>Nom : </td><td> {{instrument.type.libelle}} : {{instrument.Nom}}</td>
         <tr><td>Marque de l'instrument : </td><td>{{instrument.marque.libelle}}</td></tr>
+
+        <tr><td  rowspan="8" class="imgEtu">
+                {% set photo = 'img/etudiant/'~ etudiant.id ~'.jpg' %}
+                <span class="zoom"><img src="{{ asset(photo | trans )}}" title="{{ etudiant.prenom ~ " " ~ etudiant.nom }}" alt="{{ etudiant.prenom ~ " " ~ etudiant.nom }}"/></span></td></tr>
+
         <tr><td>numéro de série de l'instrument : </td><td>{{instrument.numSerie}}</td></tr>
         <tr><td>Date d'achat de l'instrument : </td><td>{{instrument.dateAchat|date("d/m/Y")}}</td></tr>
         <tr><td>Prix d'achat de l'instrument : </td><td>{{instrument.prixAchat}} €</td></tr>
