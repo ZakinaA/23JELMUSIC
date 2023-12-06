@@ -1,4 +1,19 @@
-{# templates/etudiant/ajouter.html.twig #}
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}LISTE DES COURS{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+        </div>
+        {# templates/etudiant/ajouter.html.twig #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+            <div class="mb-3 mb-sm-0">
+                <a href="/23JELMUSIC/public/cours/lister"><button type="button" class="btn btn-primary m-1">Annuler</button></a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
