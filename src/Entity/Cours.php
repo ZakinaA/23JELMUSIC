@@ -45,6 +45,10 @@ class Cours
 
     #[ORM\Column]
     #[Assert\Positive(message:"Le nombre de places doit être supérieur à zéro.")]
+    #[Assert\Range(
+        notInRangeMessage: "Le nombre de place ne peut pas être supérieur à 25 et inférieur à 1",
+        min: 1,
+        max: 25)]
     private ?int $NbPlaces = null;
 
     #[ORM\Column(length: 20)]
