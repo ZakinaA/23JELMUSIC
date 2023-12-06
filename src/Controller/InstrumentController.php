@@ -85,10 +85,10 @@ class InstrumentController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($instrument);
                 $entityManager->flush();
-                return $this->render('instrument/lister.html.twig', ['instrument' => $instrument, 'pInstruments' => $instruments]);
+                return $this->render('instrument/consulter.html.twig', ['instrument' => $instrument, 'pInstruments' => $instruments]);
             }
             else{
-                return $this->render('instrument/ajouter.html.twig', array('form' => $form->createView(),));
+                return $this->render('instrument/modifier.html.twig', array('form' => $form->createView(), 'instrument' => $instrument,));
             }
         }
     }
