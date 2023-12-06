@@ -9,10 +9,8 @@
             {# templates/etudiant/ajouter.html.twig #}
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                {{ form_end(form) }}
-                <a href="/23JELMUSIC/public/instrument/consulter/{{ instrument.id }}"><button type="button" class="btn btn-primary m-1">Annuler</button></a>
-            </div>
+            {{ form_end(form) }}
+            <a href="/23JELMUSIC/public/instrument/consulter/{{ instrument.id }}"><button type="button" class="btn btn-primary m-1">Annuler</button></a>
         </div>
     </div>
 {% endblock %}
