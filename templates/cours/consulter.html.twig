@@ -1,31 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}CONSULTATION D'UN COURS{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
-</head>
-<body>
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% extends 'base.html.twig' %}
 
-<h4>PAGE DE CONSULTATION D'UN COURS :</h4>
-<table border="2px">
-    <tr><td>Professeur :</td><td>{{cours.professeur.nom}} {{cours.professeur.prenom}}</td></tr>
-    <tr><td>Type d'instrument : </td><td><a href="{{ path('instrumentConsulter', { 'id': cours.typeInstruments.id }) }}">{{cours.typeInstruments.libelle}}</a></td></tr>
-    <tr><td>Heure de début : </td><td>{{cours.heuredebut|date('H:i')}}</td></tr>
-    <tr><td>Heure de fin : </td><td>{{cours.heurefin|date('H:i')}}</td></tr>
-    <tr><td>Age Minimum : </td><td>{{cours.agemini}} ans</td></tr>
-    <tr><td>Age Maximum : </td><td>{{cours.agemaxi}} ans</td></tr>
-    <tr><td>Places : </td><td>{{cours.nbplaces}}</td></tr>
-</table>
-<h4>Liste des elèves inscrits :</h4>
-<ul>
-    {% for inscription in eleveInscrits %}
-        <li>{{inscription.eleve.nom}} {{inscription.eleve.prenom}}</li>
-    {% else %}
-            <li>Aucun eleve inscrit.</li>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% block title %}CONSULTATION D'UN COURS{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold mb-4">CONSULTATION D'UN COURS :</h5>
+                </div>
+                <div class="mb-3 mb-sm-0">
+                    <a href="/23JELMUSIC/public/cours/modifier/{{ cours.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle ">
+                    <thead class="text-dark fs-4">
+                        <tr><td>Professeur :</td><td>{{cours.professeur.nom}} {{cours.professeur.prenom}}</td></tr>
+                        <tr><td>Type d'instrument : </td><td><a href="{{ path('instrumentConsulter', { 'id': cours.typeInstruments.id }) }}">{{cours.typeInstruments.libelle}}</a></td></tr>
+                        <tr><td>Heure de début : </td><td>{{cours.heuredebut|date('H:i')}}</td></tr>
+                        <tr><td>Heure de fin : </td><td>{{cours.heurefin|date('H:i')}}</td></tr>
+                        <tr><td>Age Minimum : </td><td>{{cours.agemini}} ans</td></tr>
+                        <tr><td>Age Maximum : </td><td>{{cours.agemaxi}} ans</td></tr>
+                        <tr><td>Nombre de places : </td><td>{{cours.nbplaces}}</td></tr>
+                    </thead>
+                </table>
+            </div>
+            </br>
+            <h4>Liste des elèves inscrits :</h4>
+            <table class="table text-nowrap mb-0 align-middle ">
+                <tr>
+                    {% for inscription in eleveInscrits %}
+                        <tr>
+                            <td>{{inscription.eleve.nom}} {{inscription.eleve.prenom}}</td>
+                        </tr>
+                    {% else %}
+                        <td>Aucun élève inscrit.</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}
