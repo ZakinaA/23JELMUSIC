@@ -23,18 +23,40 @@ class InstrumentAjouterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('type', EntityType::class, array('class' => 'App\Entity\TypeInstrument', 'choice_label' => 'libelle'))
-            ->add('marque', EntityType::class, array('class' => 'App\Entity\Marque', 'choice_label' => 'libelle'))
-            ->add('utilisation', TextType::class)
+            ->add('nom', TextType::class, [
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('type', EntityType::class, [
+                'class' => 'App\Entity\TypeInstrument',
+                'choice_label' => 'libelle',
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('marque', EntityType::class, [
+                'class' => 'App\Entity\Marque',
+                'choice_label' => 'libelle',
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('utilisation', TextType::class, [
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
             ->add('dateAchat', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'mb-4 form-control'],
             ])
-            ->add('prixAchat', NumberType::class)
-            ->add('numSerie', TextType::class)
-            ->add('cheminImage', HiddenType::class)
-            ->add('enregistrer', SubmitType::class, array('label' => 'Nouvel Instrument'));
+            ->add('prixAchat', NumberType::class, [
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('numSerie', TextType::class, [
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('cheminImage', HiddenType::class, [
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('enregistrer', SubmitType::class, [
+                'label' => 'Nouvel Instrument',
+                'attr' => ['class' => 'btn btn-primary'],
+            ]);
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
     }

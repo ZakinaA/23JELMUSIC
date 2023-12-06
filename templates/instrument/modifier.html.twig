@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ModificationInstrument{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4" >Modification d'un instrument</h5>
+            {# templates/etudiant/ajouter.html.twig #}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+            <a href="/23JELMUSIC/public/instrument/consulter/{{ instrument.id }}"><button type="button" class="btn btn-primary m-1">Annuler</button></a>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}
