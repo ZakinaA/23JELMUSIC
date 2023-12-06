@@ -65,7 +65,6 @@ class CoursType extends AbstractType
                 'label' => 'Créer un cours',
                 'attr' => ['class' => 'btn btn-primary m-1'],
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
