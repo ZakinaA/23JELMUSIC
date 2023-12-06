@@ -21,26 +21,50 @@ class CoursType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('typeInstruments', EntityType::class, array('class' => 'App\Entity\TypeInstrument','choice_label' => 'libelle' ))
-            ->add('jours', EntityType::class, array('class' => 'App\Entity\Jours','choice_label' => 'libelle' ))
+            ->add('typeInstruments', EntityType::class, [
+                'class' => 'App\Entity\TypeInstrument',
+                'choice_label' => 'libelle',
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('jours', EntityType::class, [
+                'class' => 'App\Entity\Jours',
+                'choice_label' => 'libelle',
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
             ->add('HeureDebut', TimeType::class, [
                 'widget' => 'single_text',
+                'attr' => ['class' => 'mb-4 form-control'],
             ])
             ->add('HeureFin', TimeType::class, [
                 'widget' => 'single_text',
+                'attr' => ['class' => 'mb-4 form-control'],
             ])
-            ->add('AgeMini', TextType::class)
-            ->add('AgeMaxi', TextType::class)
-            ->add('NbPlaces', IntegerType::class)
+            ->add('AgeMini', TextType::class,[
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('AgeMaxi', TextType::class,[
+                'attr' => ['class' => 'mb-4 form-control'],
+            ])
+            ->add('NbPlaces', IntegerType::class,[
+            'attr' => ['class' => 'mb-4 form-control'],
+        ])
             ->add('typeCours', EntityType::class, [
                 'class' => 'App\Entity\TypeCours',
                 'choice_label' => 'libelle',
                 'constraints' => [
                     new Assert\Callback(['callback' => [$this, 'validateNbPlacesAndTypeCours']]),
                 ],
+                'attr' => ['class' => 'mb-4 form-control'],
             ])
-            ->add('professeur', EntityType::class, array('class' => 'App\Entity\Professeur','choice_label' => 'nom' ))
-            ->add('save', SubmitType::class, array('label' => 'Créer un cours'));
+            ->add('professeur', EntityType::class, [
+                'class' => 'App\Entity\Professeur',
+                'choice_label' => 'nom',
+                'attr' => ['class' => 'mb-4 form-control'],
+        ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Créer un cours',
+                'attr' => ['class' => 'btn btn-primary m-1'],
+            ]);
         ;
     }
 
