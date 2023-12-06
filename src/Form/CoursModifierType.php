@@ -28,18 +28,6 @@ class CoursModifierType extends AbstractType
             ->add('HeureFin', TimeType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('libelle', TextType::class, [
-                'constraints' => [
-                    new Length([
-                        'max' => 50,
-                        'maxMessage' => 'Le libellé ne peut pas dépasser {{ limit }} caractères.',
-                    ]),
-                    new Regex([
-                        'pattern' => '/^[A-Za-z0-9\s]+$/',
-                        'message' => 'Le libellé ne peut contenir que des lettres, des chiffres et des espaces.',
-                    ]),
-                ],
-            ])
             ->add('AgeMini', TextType::class)
             ->add('AgeMaxi',TextType::class)
             ->add('NbPlaces', IntegerType::class)
