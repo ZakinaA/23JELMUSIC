@@ -98,7 +98,7 @@ class ContratPretController extends AbstractController
                 return $this->render('contratPret/consulter.html.twig', ['contratPret' => $contratPret, 'pContratPrets' => $contratPrets]);
             }
             else{
-                return $this->render('contratPret/ajouter.html.twig', array('form' => $form->createView(),));
+                return $this->render('contratPret/modifier.html.twig', array('form' => $form->createView(),));
             }
         }
     }
