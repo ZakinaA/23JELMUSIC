@@ -1,51 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+{% extends 'base.html.twig' %}
+
+{% block title %}Lister{% endblock %}
     {% block stylesheets %}{% endblock %}
-</head>
-<body>
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block body %}
 
-LISTE DES INSTRUMENTS</br>
-<table border="2px" style="text-align: center">
+<div class="card-body p-4">
+    <h5 class="card-title fw-semibold mb-4">LISTE DES INSTRUMENTS</h5>
+    <div class="table-responsive">
+        <table class="table text-nowrap mb-0 align-middle">
+            <thead class="text-dark fs-4">
+            <tr>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">NOM</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">MARQUE</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">CLASSE</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">NUM SERIE</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">DATE D'ACHAT</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">PRIX D'ACHAT</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">UTILISATION</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">COULEURS</h6>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for instrument in pInstruments %}
 
-    <tr>
-        <td>NOM</td>
-        <td>MARQUE</td>
-        <td>CLASSE</td>
-        <td>NUM SERIE</td>
-        <td>DATE D'ACHAT</td>
-        <td>PRIX D'ACHAT</td>
-        <td>UTILISATION</td>
-        <td>COULEURS</td>
-    </tr>
-    
-    {% for instrument in pInstruments %}
+                <tr>
+                    <td><a href="{{ path('instrumentConsulter', { 'id': instrument.id }) }}">{{ instrument.type.libelle }} : {{ instrument.nom }}</a></td>
+                    <td>{{ instrument.marque.libelle }}</td>
+                    <td>{{ instrument.type.classe.libelle }}</td>
+                    <td>{{ instrument.numSerie }}</td>
+                    <td>{{ instrument.dateAchat|date("d/m/Y") }}</td>
+                    <td>{{ instrument.prixAchat }} €</td>
+                    <td>{{ instrument.utilisation }}</td>
+                    {% for couleur in instrument.couleurs %}
+                        <td>{{ couleur.nom | default('N/A') }}</td>
+                    {% endfor %}
 
-        <tr>
-            <td><a href="{{ path('instrumentConsulter', { 'id': instrument.id }) }}">{{ instrument.type.libelle }} : {{ instrument.nom }}</a></td>
-            <td>{{ instrument.marque.libelle }}</td>
-            <td>{{ instrument.type.classe.libelle }}</td>
-            <td>{{ instrument.numSerie }}</td>
-            <td>{{ instrument.dateAchat|date("d/m/Y") }}</td>
-            <td>{{ instrument.prixAchat }} €</td>
-            <td>{{ instrument.utilisation }}</td>
-            {% for couleur in instrument.couleurs %}
-                <td>{{ couleur.nom | default('N/A') }}</td>
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Aucun etudiant n'a été trouvé.</td>
+                </tr>
             {% endfor %}
 
-
-        </tr>
-    {% else %}
-        <tr>
-            <td>Aucun etudiant n'a été trouvé.</td>
-        </tr>
-    {% endfor %}
-</table>
-
-
-</body>
-</html>
+            </tbody>
+        </table>
+    </div>
+</div>
+        {% endblock %}
+{% block javascripts %}{% endblock %}
