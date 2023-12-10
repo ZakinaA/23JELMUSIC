@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: InstrumentRepository::class)]
 class Instrument
 {
@@ -23,6 +25,7 @@ class Instrument
     private ?\DateTimeInterface $dateAchat = null;
 
     #[ORM\Column]
+    #[Assert\Regex(pattern:"/^\d+$/", message:"Veuillez saisir uniquement des chiffres.")]
     private ?float $prixAchat = null;
 
     #[ORM\Column(length: 100, nullable: true)]
