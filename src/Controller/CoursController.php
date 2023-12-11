@@ -24,44 +24,24 @@ class CoursController extends AbstractController
         ]);
     }
 
-    public function __construct(Environment $twig)
-    {
-        $this->twig = $twig;
-
-        $this->twig->addGlobal('jourToNumber', new \Twig\TwigFunction('jourToNumber', [$this, 'jourToNumber']));
-
-    }
-
     //#[Route('/cours/lister', name: 'coursLister')]
     public function listerCours(ManagerRegistry $doctrine): Response
     {
-
         $repository = $doctrine->getRepository(Cours::class);
         $cours = $repository->findAll();
 
-        $orderOfDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+        // Tri des cours par type d'instrument, jour (trié par ID) et heure
+        usort($cours, function ($a, $b) {
+            $dayIdA = $a->getJours()->getId();
+            $dayIdB = $b->getJours()->getId();
 
-        // Fonction personnalisée pour rechercher l'index d'un élément dans un tableau
-        $arraySearch = function ($needle, array $haystack) {
-            foreach ($haystack as $index => $value) {
-                if ($value === $needle) {
-                    return $index;
-                }
-            }
-            return false;
-        };
-
-        // Tri des cours par type d'instrument, jour et heure
-        usort($cours, function ($a, $b) use ($orderOfDays, $arraySearch) {
-            $dayComparison = $arraySearch($a->getJours()->getLibelle(), $orderOfDays) - $arraySearch($b->getJours()->getLibelle(), $orderOfDays);
-
-            if ($dayComparison === 0) {
+            if ($dayIdA === $dayIdB) {
                 $heureDebutA = $a->getHeureDebut()->getTimestamp();
                 $heureDebutB = $b->getHeureDebut()->getTimestamp();
                 return $heureDebutA - $heureDebutB;
             }
 
-            return $dayComparison;
+            return $dayIdA - $dayIdB;
         });
 
         // Calcul du nombre de cours par type d'instrument
@@ -76,6 +56,7 @@ class CoursController extends AbstractController
             'countByTypeInstrument' => $countByTypeInstrument,
         ]);
     }
+
 
     //#[Route('/cours/consulter/{id}', name: 'coursConsulter')]
     public function consulterCours(ManagerRegistry $doctrine, int $id){
@@ -144,13 +125,5 @@ class CoursController extends AbstractController
                 return $this->render('cours/ajouter.html.twig', array('form' => $form->createView(),));
             }
         }
-    }
-
-    public function jourToNumber($jour)
-    {
-        // Assurez-vous que les noms de jours correspondent exactement à ceux de votre base de données
-        $jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-
-        return array_search($jour, $jours) + 1; // Ajoutez 1 car les numéros de jour de la semaine commencent à 1
     }
 }
