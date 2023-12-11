@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Couleur;
 use App\Entity\Instrument;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -14,6 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
 
 class InstrumentModifierType extends AbstractType
 {
@@ -47,6 +49,19 @@ class InstrumentModifierType extends AbstractType
             ->add('numSerie', TextType::class, [
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
+            ->add('couleurs', EntityType::class, ([
+                'class' => Couleur::class,
+                'choice_label' => 'nom',
+                'attr' => ['class' => 'mb-4 form-control'],
+                'multiple' => true,
+                'expanded' => true,
+                'constraints' => [
+                    new Count([
+                        'max' => 2,
+                        'maxMessage' => 'Vous ne pouvez sélectionner que deux couleurs au maximum.',
+                    ]),
+                ],
+            ]))
             ->add('enregistrer', SubmitType::class, [
                 'label' => 'Modification Instrument',
                 'attr' => ['class' => 'btn btn-primary'],
