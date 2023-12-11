@@ -20,6 +20,7 @@
                 <tr><td style="text-align: center">Date d'achat : </td><td style="text-align: center">{{instrument.dateAchat|date("d/m/Y")}}</td></tr>
                 <tr><td style="text-align: center">Prix d'achat : </td><td style="text-align: center">{{instrument.prixAchat}} €</td></tr>
                 <tr><td style="text-align: center">Utilisation : </td><td style="text-align: center">{{instrument.utilisation}}</td></tr>
+                <tr><td style="text-align: center">Couleurs :</td>{% for couleur in instrument.couleurs %}<td style="text-align: center">{{ couleur.nom | default('N/A') }}</td>{% endfor %}</tr>
             </table>
         </div>
     </div>
@@ -27,7 +28,14 @@
     <br>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title fw-semibold mb-4">Liste des interventions de l'instrument : {{ instrument.Nom }}</h3>
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h3 class="card-title fw-semibold mb-4">Liste des interventions de l'instrument : {{ instrument.Nom }}</h3>
+                </div>
+                <div>
+                    <a href="/23JELMUSIC/public/intervention/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                </div>
+            </div>
             <table border="1px" style="text-align: center" class="table text-nowrap mb-0 align-middle">
                 <tr class="tableauConsulterTitre">
                     <td>DATE <br>DE DEBUT</td>
@@ -55,5 +63,5 @@
             </table>
         </div>
     </div>
-
+    <a href="/23JELMUSIC/public/instrument/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
 {% endblock %}
