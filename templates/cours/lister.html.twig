@@ -45,29 +45,27 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+
                 {% set groupedCours = {} %}
-                    {% for c in pCours %}
-                        {% set typeInstruments = c.typeInstruments.libelle %}
 
-                        {# Initialize groupedCours[typeInstrument] if not set #}
-                        {% if groupedCours[typeInstruments] is not defined %}
-                            {% set groupedCours = groupedCours|merge({(typeInstruments): []}) %}
-                        {% endif %}
+                {% for c in pCours %}
+                    {% set typeInstruments = c.typeInstruments.libelle %}
 
-                        {# Add the current course to the corresponding typeInstrument in groupedCours #}
-                        {% set groupedCours = groupedCours|merge({(typeInstruments): groupedCours[typeInstruments]|merge([c])}) %}
-                    {% endfor %}
+                    {# Initialize groupedCours[typeInstrument] if not set #}
+                    {% if groupedCours[typeInstruments] is not defined %}
+                        {% set groupedCours = groupedCours|merge({(typeInstruments): []}) %}
+                    {% endif %}
+
+                    {# Add the current course to the corresponding typeInstrument in groupedCours #}
+                    {% set groupedCours = groupedCours|merge({(typeInstruments): groupedCours[typeInstruments]|merge([c])}) %}
+                {% endfor %}
 
                 {# Render the table based on the prepared data #}
                 {% for typeInstruments, coursList in groupedCours %}
-                    {# Sort the coursList by day of the week and then by time #}
-                    {% set sortedCoursList = coursList|sort((a, b) => (a.jours.libelle > b.jours.libelle) ? 1 : (a.jours.libelle < b.jours.libelle) ? -1 : (a.heureDebut > b.heureDebut) ? 1 : -1) %}
-                    <tr>
-                    {% for c in sortedCoursList %}
+                    {% for c in coursList %}
 
                             {% if loop.first %}
-                                <td class="text-center" rowspan="{{ sortedCoursList|length }}">{{ typeInstruments }}</td>
+                                <td class="text-center" rowspan="{{ coursList|length }}">{{ typeInstruments }}</td>
                             {% endif %}
                             {#<td><a href="{{ path('coursConsulter', { 'id': c.id }) }}">{{ c.typeInstruments.libelle }}</a></td>#}
 
@@ -79,6 +77,7 @@
                             <td>{{c.nbplaces}}</td>
                         <td class="text-center">
                             <a href="/23JELMUSIC/public/cours/consulter/{{ c.id }}">👁️</a>
+                            <a href="/23JELMUSIC/public/cours/modifier/{{ c.id }}">✏️</a>
                         </td>
                         </tr>
                     {% endfor %}

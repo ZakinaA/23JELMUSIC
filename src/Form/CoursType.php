@@ -58,7 +58,9 @@ class CoursType extends AbstractType
             ])
             ->add('professeur', EntityType::class, [
                 'class' => 'App\Entity\Professeur',
-                'choice_label' => 'nom',
+                'choice_label' => function ($professeur) {
+                    return $professeur->getNom() . ' ' . $professeur->getPrenom();
+                },
                 'attr' => ['class' => 'mb-4 form-control'],
         ])
             ->add('save', SubmitType::class, [
