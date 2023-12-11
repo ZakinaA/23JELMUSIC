@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LISTE DES ELEVES{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="card">
+    <div class="card-body p-4">
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+        </div>
+        {# templates/eleve/ajouter.html.twig #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="mb-3 mb-sm-0">
+            <a href="/23JELMUSIC/public/eleve/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
