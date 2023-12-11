@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CONSULTATION D'UN ELEVE{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold mb-4">CONSULTATION D'UN ELEVE :</h5>
+                </div>
+                <div class="mb-3 mb-sm-0">
+                    <a href="/23JELMUSIC/public/eleve/modifier/{{ eleve.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle ">
+                    <thead class="text-dark fs-4">
+                        <tr><td>Nom :</td><td>{{eleve.nom}}</td></tr>
+                        <tr><td>Prenom : </td><td>{{eleve.prenom}}</td></tr>
+                        <tr><td>Mail : </td><td>{{eleve.mail}}</td></tr>
+                        <tr><td>Téléphone : </td><td>{{eleve.tel}}</td></tr>
+                        <tr><td>Contrat : </td>
+                            {% for contratPret in eleve.contratPrets %}
+                                <td>{{ contratPret.instrument.nom }}</td>
+                            {% else %}
+                                Pas de contrat
+                            {% endfor %}
+                        </tr>
+                        <tr><td>Responsables : </td>
+                            {% for responsable in eleve.responsables %}
+                                <td>{{ responsable.prenom ~ " " ~ responsable.nom }}</td>
+                            {% else %}
+                                Pas de responsable
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            </br>
+            <div class="mb-3 mb-sm-0">
+                <a href="/23JELMUSIC/public/eleve/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}
