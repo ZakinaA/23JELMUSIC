@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LISTE DES ELEVES{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold mb-4">LISTE DES ELEVES :</h5>
+                </div>
+                <div class="mb-3 mb-sm-0">
+                    <a href="/23JELMUSIC/public/eleve/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                {% if pEleve %}
+                    <table class="table text-nowrap mb-0 align-middle ">
+                        <thead class="text-dark fs-4">
+                            <tr>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Nom</h6>
+                                </th>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Prenom</h6>
+                                </th>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Ville</h6>
+                                </th>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Téléphone</h6>
+                                </th>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Mail</h6>
+                                </th>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Consulter</h6>
+                                </th>
+                            </tr>
+                        </thead>
+                        {% for e in pEleve %}
+                            <td>{{ e.nom }}</td>
+                            <td>{{ e.prenom }}</td>
+                            <td>{{ e.ville }}</td>
+                            <td>{{ e.tel }}</td>
+                            <td>{{ e.mail }}</td>
+                            <td class="text-center">
+                                <a href="/23JELMUSIC/public/eleve/consulter/{{ e.id }}">👁️</a>
+                                <a href="/23JELMUSIC/public/eleve/modifier/{{ e.id }}">✏️</a>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <tr>
+                        <td>Aucun eleve n'a été trouvé.</td>
+                    </tr>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}
