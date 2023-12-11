@@ -73,3 +73,19 @@ InterventionAjouter:
 InterventionModifier:
     path: /intervention/modifier/{id}
     controller: App\Controller\InterventionController::modifierIntervention
+
+eleveLister:
+    path: /eleve/lister
+    controller: App\Controller\EleveController::listerEleve
+
+eleveConsulter:
+    path: /eleve/consulter/{id}
+    controller: App\Controller\EleveController::consulterEleve
+
+eleveAjouter:
+    path: /eleve/ajouter
+    controller: App\Controller\EleveController::ajouterEleve
+
+eleveModifier:
+    path: /eleve/modifier/{id}
+    controller: App\Controller\EleveController::modifierEleve
