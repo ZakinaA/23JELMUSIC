@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Couleur;
 use App\Entity\Instrument;
 use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
@@ -17,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Validator\Constraints\Count;
 
 class InstrumentAjouterType extends AbstractType
 {
@@ -53,7 +55,19 @@ class InstrumentAjouterType extends AbstractType
             ->add('cheminImage', HiddenType::class, [
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
-            ->add('couleurs')
+            ->add('couleurs', EntityType::class, ([
+                'class' => Couleur::class,
+                'choice_label' => 'nom',
+                'attr' => ['class' => 'mb-4 form-control'],
+                'multiple' => true,
+                'expanded' => true,
+                'constraints' => [
+                    new Count([
+                        'max' => 2,
+                        'maxMessage' => 'Vous ne pouvez sélectionner que deux couleurs au maximum.',
+                    ]),
+                ],
+            ]))
             ->add('enregistrer', SubmitType::class, [
                 'label' => 'Nouvel Instrument',
                 'attr' => ['class' => 'btn btn-primary'],
