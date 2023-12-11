@@ -43,6 +43,7 @@
                     <td>PROFESSIONNEL</td>
                     <td>DESCRIPTIF</td>
                     <td>PRIX</td>
+                    <td>ACTION</td>
                 </tr>
 
                 {% for intervention in instrument.interventions %}
@@ -52,6 +53,7 @@
                         <td style="padding: 10px">{{ intervention.professionnel.nom }} <br> {{ intervention.professionnel.numRue }} {{ intervention.professionnel.rue }} <br> {{ intervention.professionnel.copos }} {{ intervention.professionnel.ville }}</td>
                         <td style="padding: 10px">{{ intervention.descriptif }}</td>
                         <td style="padding: 10px">{{ intervention.prix }} €</td>
+                        <td><a href="/23JELMUSIC/public/intervention/modifier/{{ intervention.id }}">✏️</a></td>
 
                     </tr>
                 {% else %}
