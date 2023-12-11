@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: InstrumentRepository::class)]
 class Instrument
 {
@@ -16,16 +18,20 @@ class Instrument
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 30)]
     private ?string $numSerie = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\LessThanOrEqual('today', message: 'La date ne peut pas être suppérieur à la date d\'aujourd\'hui'),]
     private ?\DateTimeInterface $dateAchat = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 20)]
+    #[Assert\Regex(pattern:"/^\d+$/", message:"Veuillez saisir uniquement des chiffres.")]
+    #[Assert\Positive(message:"Le prix doit être supérieur à zéro.")]
     private ?float $prixAchat = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
+    #[Assert\Regex(pattern:"/^[a-zA-Z]+$/", message:"Veuillez saisir uniquement des lettres.")]
     private ?string $utilisation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -42,7 +48,7 @@ class Instrument
     #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: Accessoire::class)]
     private Collection $accessoires;
 
-    #[ORM\Column(length: 70)]
+    #[ORM\Column(length: 30)]
     private ?string $nom = null;
 
     #[ORM\ManyToMany(targetEntity: Couleur::class, inversedBy: 'instruments')]

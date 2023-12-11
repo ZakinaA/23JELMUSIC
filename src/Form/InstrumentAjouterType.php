@@ -53,6 +53,7 @@ class InstrumentAjouterType extends AbstractType
             ->add('cheminImage', HiddenType::class, [
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
+            ->add('couleurs')
             ->add('enregistrer', SubmitType::class, [
                 'label' => 'Nouvel Instrument',
                 'attr' => ['class' => 'btn btn-primary'],
