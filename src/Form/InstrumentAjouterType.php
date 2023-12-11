@@ -73,7 +73,6 @@ class InstrumentAjouterType extends AbstractType
                 'attr' => ['class' => 'btn btn-primary'],
             ]);
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -81,12 +80,5 @@ class InstrumentAjouterType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Instrument::class,
         ]);
-    }
-
-    public function onPreSubmit(FormEvent $event)
-    {
-        $data = $event->getData();
-        $data['cheminImage'] = '/img' . $data['cheminImage'];
-        $event->setData($data);
     }
 }

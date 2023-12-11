@@ -26,12 +26,11 @@ class Instrument
     private ?\DateTimeInterface $dateAchat = null;
 
     #[ORM\Column(length: 20)]
-    #[Assert\Regex(pattern:"/^\d+$/", message:"Veuillez saisir uniquement des chiffres.")]
     #[Assert\Positive(message:"Le prix doit être supérieur à zéro.")]
     private ?float $prixAchat = null;
 
     #[ORM\Column(length: 20, nullable: true)]
-    #[Assert\Regex(pattern:"/^[a-zA-Z]+$/", message:"Veuillez saisir uniquement des lettres.")]
+    #[Assert\Regex(pattern:"/^\D*$/", message:"Veuillez saisir uniquement des lettres.")]
     private ?string $utilisation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
