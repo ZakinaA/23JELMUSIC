@@ -28,13 +28,20 @@
     <br>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title fw-semibold mb-4">Liste des interventions de l'instrument : {{ instrument.Nom }}</h3>
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h3 class="card-title fw-semibold mb-4">Liste des interventions de l'instrument : {{ instrument.Nom }}</h3>
+                </div>
+                <div>
+                    <a href="/23JELMUSIC/public/intervention/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                </div>
+            </div>
             <table border="1px" style="text-align: center" class="table text-nowrap mb-0 align-middle">
                 <tr class="tableauConsulterTitre">
                     <td>DATE <br>DE DEBUT</td>
                     <td>DATE <br>DE FIN</td>
                     <td>PROFESSIONNEL</td>
-                    <td>DESCRIPTIF</td>
+                    <td>DESCRIPTIF</td>git 
                     <td>PRIX</td>
                 </tr>
 
@@ -56,5 +63,5 @@
             </table>
         </div>
     </div>
-
+    <a href="/23JELMUSIC/public/instrument/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
 {% endblock %}
