@@ -2,9 +2,13 @@ controllers:
     resource: ../src/Controller/
     type: attribute
 
-connexion:
-    path: /connexion
-    controller: \App\Controller\ConnexionController::connexionCompte
+#connexion:
+#    path: /connexion
+#    controller: \App\Controller\RegistrationController::connexionCompte
+#
+inscription:
+    path: /inscription
+    controller: \App\Controller\RegistrationController::register
     
 instrumentConsulter:
     path: /instrument/consulter/{id}
