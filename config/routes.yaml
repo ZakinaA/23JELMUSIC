@@ -1,6 +1,10 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+connexion:
+    path: /connexion
+    controller: \App\Controller\ConnexionController::connexionCompte
     
 instrumentConsulter:
     path: /instrument/consulter/{id}
