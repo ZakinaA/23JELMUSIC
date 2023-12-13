@@ -23,17 +23,19 @@
                         <tr><td>Téléphone : </td><td>{{eleve.tel}}</td></tr>
                         <tr><td>Contrat : </td>
                             {% for contratPret in eleve.contratPrets %}
-                                <td>{{ contratPret.instrument.nom }}</td>
+                                <td><a href="{{ path('ContratPretConsulter', { 'id': eleve.id }) }}">{{ contratPret.instrument.nom }}</a> fait le <strong>{{ contratPret.dateDebut.format('Y-m-d') }}</strong></td>
                             {% else %}
                                 Pas de contrat
                             {% endfor %}
                         </tr>
                         <tr><td>Responsables : </td>
-                            {% for responsable in eleve.responsables %}
-                                <td>{{ responsable.prenom ~ " " ~ responsable.nom }}</td>
-                            {% else %}
-                                Pas de responsable
-                            {% endfor %}
+                            <td>
+                                {% for responsable in eleve.responsables %}
+                                    {{ responsable.prenom ~ " " ~ responsable.nom }}<br>
+                                {% else %}
+                                    Pas de responsable
+                                {% endfor %}
+                            </td>
                         </tr>
                     </thead>
                 </table>
