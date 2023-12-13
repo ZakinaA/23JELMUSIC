@@ -35,20 +35,21 @@
                                     <h6 class="fw-semibold mb-0">Mail</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Consulter</h6>
+                                    <h6 class="fw-semibold mb-0">Actions</h6>
                                 </th>
                             </tr>
                         </thead>
                         {% for e in pEleve %}
-                            <td>{{ e.nom }}</td>
-                            <td>{{ e.prenom }}</td>
-                            <td>{{ e.ville }}</td>
-                            <td>{{ e.tel }}</td>
-                            <td>{{ e.mail }}</td>
-                            <td class="text-center">
-                                <a href="/23JELMUSIC/public/eleve/consulter/{{ e.id }}">👁️</a>
-                                <a href="/23JELMUSIC/public/eleve/modifier/{{ e.id }}">✏️</a>
-                            </td>
+                            <tr>
+                                <td>{{ e.nom }}</td>
+                                <td>{{ e.prenom }}</td>
+                                <td>{{ e.ville }}</td>
+                                <td>{{ e.tel }}</td>
+                                <td>{{ e.mail }}</td>
+                                <td>
+                                    <a href="/23JELMUSIC/public/eleve/consulter/{{ e.id }}">👁️</a>
+                                    <a href="/23JELMUSIC/public/eleve/modifier/{{ e.id }}">✏️</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>
