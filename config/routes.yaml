@@ -2,13 +2,17 @@ controllers:
     resource: ../src/Controller/
     type: attribute
 
-#connexion:
-#    path: /connexion
-#    controller: \App\Controller\RegistrationController::connexionCompte
-#
+connexion:
+    path: /connexion
+    controller: \App\Controller\SecurityController::login
+
 inscription:
     path: /inscription
     controller: \App\Controller\RegistrationController::register
+
+deconnexion:
+    path: /logout
+    controller: \App\Controller\SecurityController::logout
     
 instrumentConsulter:
     path: /instrument/consulter/{id}
