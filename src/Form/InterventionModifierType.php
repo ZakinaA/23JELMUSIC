@@ -20,18 +20,24 @@ class InterventionModifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Instrument', EntityType::class, array ('class' => 'App\Entity\Instrument','choice_label' => 'nom' ))
-            ->add('Professionnel', EntityType::class, array('class' => 'App\Entity\Professionnel','choice_label' => 'nom'))
-            ->add('DateDebut',DateType::class, [
+            ->add('dateDebut',DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'mb-4 form-control'],
+
+            ])
+            ->add('dateFin',DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'required' => false,
+                'attr' => ['class' => 'mb-4 form-control'],
             ])
-            ->add('DateFin',DateType::class, [
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                'required' => false,
+            ->add('Professionnel', EntityType::class,[
+                'class' => 'App\Entity\Professionnel',
+                'choice_label' => 'nom',
+                'attr' => ['class' => 'mb-4 form-control'],
             ])
+
             ->add('Descriptif', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -46,6 +52,7 @@ class InterventionModifierType extends AbstractType
                     ]),
 
                 ],
+                'attr' => ['class' => 'mb-4 form-control'],
                 'required' => false,
             ])
 
@@ -56,11 +63,17 @@ class InterventionModifierType extends AbstractType
                         'message' => 'Le prix ne peut pas être négatif.',
                     ]),
                 ],
+                'attr' => ['class' => 'mb-4 form-control'],
                 'required' => false,
             ])
 
 
-            ->add('enregistrer', SubmitType::class, array('label' => 'Modifier l\'intervention'))
+            ->add('enregistrer', SubmitType::class, [
+
+                'label' => 'Modifier le prêt',
+                'attr' => ['class' => 'btn btn-primary m-1']
+
+            ])
         ;
     }
 

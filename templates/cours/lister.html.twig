@@ -5,92 +5,91 @@
 
 {% block body %}
     <div class="card">
-    <div class="card-body p-4">
-        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-            <div class="mb-3 mb-sm-0">
-                <h5 class="card-title fw-semibold mb-4">LISTE DES COURS :</h5>
+        <div class="card-body p-4">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold mb-4">LISTE DES COURS :</h5>
+                </div>
+                <div class="mb-3 mb-sm-0">
+                    <a href="/23JELMUSIC/public/cours/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                </div>
             </div>
-            <div class="mb-3 mb-sm-0">
-                <a href="/23JELMUSIC/public/cours/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
-            </div>
-        </div>
-        <div class="table-responsive">
-            {% if pCours %}
-            <table class="table text-nowrap mb-0 align-middle ">
-                <thead class="text-dark fs-4">
-                <tr>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Instrument</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Jours du cours</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Heure de début</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Heure de fin</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Âge maximum</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Âge minimum</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Nombre de place</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Actions</h6>
-                    </th>
-                </tr>
-                </thead>
+            <div class="table-responsive">
+                {% if pCours %}
+                <table class="table text-nowrap mb-0 align-middle ">
+                    <thead class="text-dark fs-4">
+                    <tr>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Instrument</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Jours du cours</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Heure de début</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Heure de fin</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Âge maximum</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Âge minimum</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Nombre de place</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">Consulter</h6>
+                        </th>
+                    </tr>
+                    </thead>
+                    {% set groupedCours = {} %}
 
-                {% set groupedCours = {} %}
+                    {% for c in pCours %}
+                        {% set typeInstruments = c.typeInstruments.libelle %}
 
-                {% for c in pCours %}
-                    {% set typeInstruments = c.typeInstruments.libelle %}
+                        {# Initialize groupedCours[typeInstrument] if not set #}
+                        {% if groupedCours[typeInstruments] is not defined %}
+                            {% set groupedCours = groupedCours|merge({(typeInstruments): []}) %}
+                        {% endif %}
 
-                    {# Initialize groupedCours[typeInstrument] if not set #}
-                    {% if groupedCours[typeInstruments] is not defined %}
-                        {% set groupedCours = groupedCours|merge({(typeInstruments): []}) %}
-                    {% endif %}
-
-                    {# Add the current course to the corresponding typeInstrument in groupedCours #}
-                    {% set groupedCours = groupedCours|merge({(typeInstruments): groupedCours[typeInstruments]|merge([c])}) %}
-                {% endfor %}
-
-                {# Render the table based on the prepared data #}
-                {% for typeInstruments, coursList in groupedCours %}
-                    {% for c in coursList %}
-
-                            {% if loop.first %}
-                                <td class="text-center" rowspan="{{ coursList|length }}">{{ typeInstruments }}</td>
-                            {% endif %}
-                            {#<td><a href="{{ path('coursConsulter', { 'id': c.id }) }}">{{ c.typeInstruments.libelle }}</a></td>#}
-
-                            <td>{{c.jours.libelle}}</td>
-                            <td>{{c.heuredebut|date('H:i')}}</td>
-                            <td>{{c.heurefin|date('H:i')}}</td>
-                            <td>{{c.agemaxi}} ans</td>
-                            <td>{{c.agemini}} ans</td>
-                            <td>{{c.nbplaces}}</td>
-                        <td class="text-center">
-                            <a href="/23JELMUSIC/public/cours/consulter/{{ c.id }}">👁️</a>
-                            <a href="/23JELMUSIC/public/cours/modifier/{{ c.id }}">✏️</a>
-                        </td>
-                        </tr>
+                        {# Add the current course to the corresponding typeInstrument in groupedCours #}
+                        {% set groupedCours = groupedCours|merge({(typeInstruments): groupedCours[typeInstruments]|merge([c])}) %}
                     {% endfor %}
-                {% endfor %}
-            </table>
 
-            {% else %}
-                <tr>
-                    <td>Aucun cours n'a été trouvé.</td>
-                </tr>
-            {% endif %}
+                    {# Render the table based on the prepared data #}
+                    {% for typeInstruments, coursList in groupedCours %}
+                        {% for c in coursList %}
+
+                                {% if loop.first %}
+                                    <td class="text-center" rowspan="{{ coursList|length }}">{{ typeInstruments }}</td>
+                                {% endif %}
+                                {#<td><a href="{{ path('coursConsulter', { 'id': c.id }) }}">{{ c.typeInstruments.libelle }}</a></td>#}
+
+                                <td>{{c.jours.libelle}}</td>
+                                <td>{{c.heuredebut|date('H:i')}}</td>
+                                <td>{{c.heurefin|date('H:i')}}</td>
+                                <td>{{c.agemaxi}} ans</td>
+                                <td>{{c.agemini}} ans</td>
+                                <td>{{c.nbplaces}}</td>
+                            <td class="text-center">
+                                <a href="/23JELMUSIC/public/cours/consulter/{{ c.id }}">👁️</a>
+                                <a href="/23JELMUSIC/public/cours/modifier/{{ c.id }}">✏️</a>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+
+                {% else %}
+                    <tr>
+                        <td>Aucun cours n'a été trouvé.</td>
+                    </tr>
+                {% endif %}
+            </div>
         </div>
-    </div>
     </div>
 {% endblock %}
 {% block javascripts %}{% endblock %}

@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}AjouterInstrument{% endblock %}
+{% block title %}Modifier une intervention{% endblock %}
 {% block stylesheets %}{% endblock %}
 {% block body %}
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title fw-semibold mb-4" >Ajout d'un instrument</h5>
-
-        {# templates/etudiant/ajouter.html.twig #}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <h5 class="card-title fw-semibold mb-4">Modifier une intervention</h5>
+{# templates/etudiant/ajouter.html.twig #}
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
         <a href="/23JELMUSIC/public/instrument/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
     </div>
 </div>

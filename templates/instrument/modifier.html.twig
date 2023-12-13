@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ModificationInstrument{% endblock %}
+{% block title %}Modification Instrument{% endblock %}
 {% block stylesheets %}{% endblock %}
 {% block body %}
     <div class="card">
@@ -10,7 +10,7 @@
             {{ form_start(form) }}
             {{ form_widget(form) }}
             {{ form_end(form) }}
-            <a href="/23JELMUSIC/public/instrument/consulter/{{ instrument.id }}"><button type="button" class="btn btn-primary m-1">Annuler</button></a>
+            <a href="/23JELMUSIC/public/instrument/consulter/{{ instrument.id }}"><button type="button" class="btn btn-primary m-1">Retour</button></a>
         </div>
     </div>
 {% endblock %}

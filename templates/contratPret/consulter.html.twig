@@ -16,14 +16,14 @@
         <table class="table text-nowrap mb-0 align-middle">
 
     <tr><td>Eleve : </td><td>{{contratPret.eleve.nom}} {{contratPret.eleve.prenom}}</td>
-    <tr><td>Responsables de l'élève: </td>
+    <tr><td>Responsables de l'élève : </td>
         <td>
             {% for responsable in contratPret.eleve.responsables %}
             {{ responsable.nom }} {{ responsable.prenom }},
             {% endfor %}
         </td>
-    <tr><td>Date de debut : </td><td>{{contratPret.datedebut|date("d/m/Y")}} état de l'instrument : {{contratPret.etatdetailledebut}} </td></tr>
-    <tr><td>Date de fin : </td><td>{{contratPret.datefin|date("d/m/Y")}} état de l'instrument : {{contratPret.etatdetailleretour}}</td></tr>
+    <tr><td>Date de debut : <br> Etat de l'instrument : </td><td>{{contratPret.datedebut|date("d/m/Y")}} <br> {{contratPret.etatdetailledebut}} </td></tr>
+    <tr><td>Date de fin : <br> Etat de l'instrument :</td><td>{{contratPret.datefin|date("d/m/Y")}} <br> {{contratPret.etatdetailleretour}}</td></tr>
     <tr><td>Attestation d'assurance : </td><td>{{contratPret.Attestationassurance}} </td></tr>
 
     </table>
