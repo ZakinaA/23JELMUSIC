@@ -94,7 +94,7 @@ class InterventionController extends AbstractController
                 return $this->render('intervention/consulter.html.twig', ['intervention' => $intervention, 'pInterventions' => $interventions]);
             }
             else{
-                return $this->render('intervention/ajouter.html.twig', array('form' => $form->createView(),));
+                return $this->render('intervention/modifier.html.twig', array('form' => $form->createView(),));
             }
         }
     }

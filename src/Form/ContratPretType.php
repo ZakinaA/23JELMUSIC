@@ -80,8 +80,8 @@ class ContratPretType extends AbstractType
 
             ->add('enregistrer', SubmitType::class, [
 
-                        'label' => 'Ajout du prêt',
-                         'attr' => ['class' => 'btn btn-primary m-1']
+                'label' => 'Modifier le prêt',
+                'attr' => ['class' => 'btn btn-primary m-1']
 
             ])
         ;
