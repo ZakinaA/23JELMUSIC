@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Form\CoursModifierType;
 use App\Form\EleveModifierType;
 use App\Form\EleveType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,11 +71,8 @@ class EleveController extends AbstractController
 
         $eleve = $doctrine->getRepository(Eleve::class)->find($id);
 
-        $repository = $doctrine->getRepository(Eleve::class);
-        //$eleve = $repository->findAll();
-
         if (!$eleve) {
-            throw $this->createNotFoundException('Aucun eleve trouvé avec le numéro '.$id);
+            throw $this->createNotFoundException('Aucune eleve trouvé avec le numéro '.$id);
         }
         else
         {
@@ -89,7 +85,7 @@ class EleveController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($eleve);
                 $entityManager->flush();
-                return $this->redirectToRoute("eleveLister");
+                return $this->render('eleve/lister.html.twig',['eleve' => $eleve,]);
             }
             else{
                 return $this->render('eleve/ajouter.html.twig', array('form' => $form->createView(),));
