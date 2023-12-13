@@ -1,6 +1,11 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+acceuilConsulter:
+    path: /
+    controller: \App\Controller\AcceuilController::index
+
     
 instrumentConsulter:
     path: /instrument/consulter/{id}
@@ -73,3 +78,5 @@ InterventionAjouter:
 InterventionModifier:
     path: /intervention/modifier/{id}
     controller: App\Controller\InterventionController::modifierIntervention
+
+
