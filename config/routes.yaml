@@ -79,4 +79,6 @@ InterventionModifier:
     path: /intervention/modifier/{id}
     controller: App\Controller\InterventionController::modifierIntervention
 
-
+rgpdConsulter:
+    path: /rgpd
+    controller: \App\Controller\EgpdController::index
