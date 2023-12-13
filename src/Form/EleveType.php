@@ -41,9 +41,11 @@ class EleveType extends AbstractType
             ])
             ->add('responsables', EntityType::class, [
                 'class' => 'App\Entity\Responsable',
-                'choice_label' => function ($responsables) {
-                    return $responsables->getNom() . ' ' . $responsables->getPrenom();
+                'choice_label' => function ($eleve) {
+                    return $eleve->getNom() . ' ' . $eleve->getPrenom();
                 },
+                'multiple' => true,
+                'expanded' => true,
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
             ->add('save', SubmitType::class, [
