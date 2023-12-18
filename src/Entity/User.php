@@ -18,6 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Regex(pattern:"/^\d+$/", message:"Certains caractères sont interdits.")]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -27,6 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(pattern:"/^\d+$/", message:"Certains caractères sont interdits.")]
     private ?string $password = null;
 
     public function getId(): ?int
