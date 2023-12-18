@@ -82,3 +82,7 @@ InterventionModifier:
 rgpdConsulter:
     path: /rgpd
     controller: \App\Controller\EgpdController::index
+
+ProfessionnelLister:
+    path: /professionnel/lister
+    controller: App\Controller\ProfessionnelController::listerProfessionnel
