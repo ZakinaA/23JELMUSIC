@@ -21,6 +21,7 @@
                     <thead class="text-dark fs-4">
                         <tr><td>Professeur :</td><td>{{cours.professeur.nom}} {{cours.professeur.prenom}}</td></tr>
                         <tr><td>Type d'instrument : </td><td><a href="{{ path('instrumentConsulter', { 'id': cours.typeInstruments.id }) }}">{{cours.typeInstruments.libelle}}</a></td></tr>
+                        <tr><td>Jours : </td><td>{{cours.jours.libelle}}</td></tr>
                         <tr><td>Heure de début : </td><td>{{cours.heuredebut|date('H:i')}}</td></tr>
                         <tr><td>Heure de fin : </td><td>{{cours.heurefin|date('H:i')}}</td></tr>
                         <tr><td>Age Minimum : </td><td>{{cours.agemini}} ans</td></tr>
@@ -29,23 +30,41 @@
                     </thead>
                 </table>
             </div>
-            </br>
-            <h4>Liste des elèves inscrits :</h4>
-            <table class="table text-nowrap mb-0 align-middle ">
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h3 class="card-title fw-semibold mb-4">LISTE DES ELEVES INSCRITS :</h3>
+                </div>
+                <div>
+                    <a href="/23JELMUSIC/public/inscription/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                </div>
+            </div>
+            <table class="table text-nowrap mb-0 align-middle">
+                <tr class="tableauConsulterTitre">
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Actions</td>
+                </tr>
                 <tr>
                     {% for inscription in eleveInscrits %}
                         <tr>
-                            <td>{{inscription.eleve.nom}} {{inscription.eleve.prenom}}</td>
+                            <td>{{inscription.eleve.prenom}}</td>
+                            <td>{{inscription.eleve.nom}}</td>
+                            <td ><a href="/23JELMUSIC/public/eleve/modifier/{{ inscription.eleve.id }}">✏️</a></td>
                         </tr>
                     {% else %}
                         <td>Aucun élève inscrit.</td>
+                        <td></td>
+                        <td></td>
                     {% endfor %}
             </table>
-            </br>
-            <div class="mb-3 mb-sm-0">
-                <a href="/23JELMUSIC/public/cours/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
-            </div>
         </div>
+    </div>
+    <div class="mb-3 mb-sm-0">
+        <a href="/23JELMUSIC/public/cours/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
     </div>
 {% endblock %}
 {% block javascripts %}{% endblock %}

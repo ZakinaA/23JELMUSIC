@@ -117,3 +117,19 @@ eleveAjouter:
 eleveModifier:
     path: /eleve/modifier/{id}
     controller: App\Controller\EleveController::modifierEleve
+
+inscriptionLister:
+    path: /inscription/lister
+    controller: App\Controller\InscriptionController::listerInscription
+
+inscriptionConsulter:
+    path: /inscription/consulter/{id}
+    controller: App\Controller\InscriptionController::consulterInscription
+
+inscriptionAjouter:
+    path: /inscription/ajouter
+    controller: App\Controller\InscriptionController::ajouterInscription
+
+inscriptionModifier:
+    path: /inscription/modifier/{id}
+    controller: App\Controller\InscriptionController::modifierInscription

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CONSULTATION D'UNE INSCRIPTION{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold mb-4">CONSULTATION D'UNE INSCRIPTION :</h5>
+                </div>
+                <div class="mb-3 mb-sm-0">
+                    <a href="/23JELMUSIC/public/inscription/modifier/{{ inscription.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle ">
+                    <thead class="text-dark fs-4">
+                    <tr><td>Eleve :</td><td>{{ inscription.eleve.nom }} {{ inscription.eleve.prenom }}</td></tr>
+                    <tr><td>Cours : </td><td><a href="{{ path('coursConsulter', { 'id': inscription.cours.id }) }}">{{ inscription.cours.typeInstruments.libelle }}</a></td></tr>
+                    <tr><td>Jours : </td><td>{{ inscription.cours.jours.libelle }}</td></tr>
+                    <tr><td>Date de l'inscription : </td><td>{{ inscription.dateInscription|date("d/m/Y") }}</td></tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 mb-sm-0">
+        <a href="/23JELMUSIC/public/inscription/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}
