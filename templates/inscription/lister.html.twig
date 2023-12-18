@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LISTE DES INSCRIPTIONS{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold mb-4">LISTE DES INSCRIPTIONS :</h5>
+                </div>
+                <div class="mb-3 mb-sm-0">
+                    <a href="/23JELMUSIC/public/inscription/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                {% if pInscription %}
+                    <table class="table text-nowrap mb-0 align-middle ">
+                        <thead class="text-dark fs-4">
+                        <tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Eleve</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Cours</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Jours</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Date de l'inscription</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Actions</h6>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        {% for i in pInscription %}
+                            <td>{{ i.eleve.nom }} {{ i.eleve.prenom }}</td>
+                            <td><a href="{{ path('coursConsulter', { 'id': i.cours.id }) }}">{{ i.cours.typeInstruments.libelle }}</a></td>
+                            <td>{{ i.cours.jours.libelle }}</td>
+                            <td>{{ i.dateInscription|date("d/m/Y") }}</td>
+                            <td>
+                                <a href="/23JELMUSIC/public/inscription/consulter/{{ i.id }}">👁️</a>
+                                <a href="/23JELMUSIC/public/inscription/modifier/{{ i.id }}">✏️</a>
+                            </td>
+                            <tr>
+                        {% endfor %}
+                    </table>
+
+                {% else %}
+                    <tr>
+                        <td>Aucun cours n'a été trouvé.</td>
+                    </tr>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}

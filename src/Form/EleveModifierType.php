@@ -22,7 +22,7 @@ class EleveModifierType extends AbstractType
             ->add('prenom', TextType::class,[
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
-            ->add('numRue', NumberType::class,[
+            ->add('numRue', TextType::class,[
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
             ->add('rue', TextType::class,[
@@ -34,7 +34,7 @@ class EleveModifierType extends AbstractType
             ->add('ville', TextType::class,[
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
-            ->add('tel', NumberType::class,[
+            ->add('tel', TextType::class,[
                 'attr' => ['class' => 'mb-4 form-control'],
             ])
             ->add('mail', TextType::class,[
@@ -42,8 +42,8 @@ class EleveModifierType extends AbstractType
             ])
             ->add('responsables', EntityType::class, [
                 'class' => 'App\Entity\Responsable',
-                'choice_label' => function ($eleve) {
-                    return $eleve->getNom() . ' ' . $eleve->getPrenom();
+                'choice_label' => function ($responsable) {
+                    return $responsable->getNom() . ' ' . $responsable->getPrenom();
                 },
                 'multiple' => true,
                 'expanded' => true,
@@ -53,7 +53,6 @@ class EleveModifierType extends AbstractType
                 'label' => 'Modifier un éleve',
                 'attr' => ['class' => 'btn btn-primary m-1'],
             ]);
-        ;
     }
 
     public function getParent(){
