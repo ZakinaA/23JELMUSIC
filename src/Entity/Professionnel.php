@@ -34,6 +34,7 @@ class Professionnel
     private ?int $tel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Email(message:"Veuillez saisir un mail valide")]
     private ?string $mail = null;
 
     #[ORM\OneToMany(mappedBy: 'professionnel', targetEntity: Intervention::class)]
