@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un professionnel{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Modifier un professionel</h5>
+            {# templates/etudiant/ajouter.html.twig #}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+            <a href="/23JELMUSIC/public/professionnel/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}
