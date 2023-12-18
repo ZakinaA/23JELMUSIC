@@ -47,7 +47,7 @@ class CoursType extends AbstractType
             ])
             ->add('NbPlaces', IntegerType::class,[
             'attr' => ['class' => 'mb-4 form-control'],
-        ])
+            ])
             ->add('typeCours', EntityType::class, [
                 'class' => 'App\Entity\TypeCours',
                 'choice_label' => 'libelle',
@@ -62,7 +62,7 @@ class CoursType extends AbstractType
                     return $professeur->getNom() . ' ' . $professeur->getPrenom();
                 },
                 'attr' => ['class' => 'mb-4 form-control'],
-        ])
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Créer un cours',
                 'attr' => ['class' => 'btn btn-primary m-1'],
