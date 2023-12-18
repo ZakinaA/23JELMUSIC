@@ -10,9 +10,11 @@
                 <div class="mb-3 mb-sm-0">
                     <h5 class="card-title fw-semibold mb-4">LISTE DES INSCRIPTIONS :</h5>
                 </div>
-                <div class="mb-3 mb-sm-0">
-                    <a href="/23JELMUSIC/public/inscription/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="mb-3 mb-sm-0">
+                        <a href="/23JELMUSIC/public/inscription/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                    </div>
+                {% endif %}
             </div>
             <div class="table-responsive">
                 {% if pInscription %}
@@ -44,7 +46,9 @@
                             <td>{{ i.dateInscription|date("d/m/Y") }}</td>
                             <td>
                                 <a href="/23JELMUSIC/public/inscription/consulter/{{ i.id }}">👁️</a>
-                                <a href="/23JELMUSIC/public/inscription/modifier/{{ i.id }}">✏️</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="/23JELMUSIC/public/inscription/modifier/{{ i.id }}">✏️</a>
+                                {% endif %}
                             </td>
                             <tr>
                         {% endfor %}
