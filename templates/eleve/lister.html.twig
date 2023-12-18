@@ -10,9 +10,11 @@
                 <div class="mb-3 mb-sm-0">
                     <h5 class="card-title fw-semibold mb-4">LISTE DES ELEVES :</h5>
                 </div>
+                {% if is_granted('ROLE_ADMIN') %}
                 <div class="mb-3 mb-sm-0">
                     <a href="/23JELMUSIC/public/eleve/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
                 </div>
+                {% endif %}
             </div>
             <div class="table-responsive">
                 {% if pEleve %}
@@ -48,7 +50,9 @@
                                 <td>{{ e.mail }}</td>
                                 <td>
                                     <a href="/23JELMUSIC/public/eleve/consulter/{{ e.id }}">👁️</a>
-                                    <a href="/23JELMUSIC/public/eleve/modifier/{{ e.id }}">✏️</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="/23JELMUSIC/public/eleve/modifier/{{ e.id }}">✏️</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

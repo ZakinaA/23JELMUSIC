@@ -10,9 +10,11 @@
                 <div class="mb-3 mb-sm-0">
                     <h5 class="card-title fw-semibold mb-4">LISTE DES COURS :</h5>
                 </div>
-                <div class="mb-3 mb-sm-0">
-                    <a href="/23JELMUSIC/public/cours/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="mb-3 mb-sm-0">
+                        <a href="/23JELMUSIC/public/cours/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                    </div>
+                {% endif %}
             </div>
             <div class="table-responsive">
                 {% if pCours %}
@@ -76,7 +78,9 @@
                                 <td>{{c.nbplaces}}</td>
                             <td class="text-center">
                                 <a href="/23JELMUSIC/public/cours/consulter/{{ c.id }}">👁️</a>
-                                <a href="/23JELMUSIC/public/cours/modifier/{{ c.id }}">✏️</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="/23JELMUSIC/public/cours/modifier/{{ c.id }}">✏️</a>
+                                {% endif %}
                             </td>
                             </tr>
                         {% endfor %}

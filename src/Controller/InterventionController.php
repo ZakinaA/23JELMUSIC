@@ -48,20 +48,24 @@ class InterventionController extends AbstractController
             'intervention' => $intervention,]);
     }
 
-    public function ajouterIntervention(ManagerRegistry $doctrine,Request $request){
+    public function ajouterIntervention(ManagerRegistry $doctrine,Request $request, $instrumentId){
+
+        $instrumentRepository= $doctrine->getRepository(Instrument::class)->find($instrumentId);
+        $instrument = $instrumentRepository;
+
         $intervention = new Intervention();
         $form = $this->createForm(InterventionAjoutType::class, $intervention);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $instrument = $form->getData();
+            $intervention->setInstrument($instrument);
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($intervention);
             $entityManager->flush();
 
-            return $this->render('intervention/consulter.html.twig', ['intervention' => $intervention,]);
+            return $this->render('instrument/consulter.html.twig', ['intervention' => $intervention, 'instrument' => $instrument,]);
         }
         else
         {

@@ -9,9 +9,11 @@
         <div class="mb-3 mb-sm-0">
             <h5 class="card-title fw-semibold">LISTE DES CONTRATS DE PRÊT</h5>
         </div>
-        <div>
-            <a href="{{ path('ContratPretAjouter') }}" class="btn btn-primary m-1">Ajouter</a>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div>
+                <a href="{{ path('ContratPretAjouter') }}" class="btn btn-primary m-1">Ajouter</a>
+            </div>
+        {% endif %}
     </div>
     <div class="table-responsive">
         <table class="table text-nowrap mb-0 align-middle">

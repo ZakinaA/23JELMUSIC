@@ -70,11 +70,10 @@ class InterventionAjoutType extends AbstractType
 
             ->add('enregistrer', SubmitType::class, [
 
-                'label' => 'Ajouter le prêt',
+                'label' => 'Ajouter l\'intervention',
                 'attr' => ['class' => 'btn btn-primary m-1']
 
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

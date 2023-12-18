@@ -83,7 +83,7 @@ InterventionConsulter:
     controller: App\Controller\InterventionController::consulterIntervention
 
 InterventionAjouter:
-    path: /intervention/ajouter
+    path: /intervention/ajouter/{instrumentId}
     controller: App\Controller\InterventionController::ajouterIntervention
 
 InterventionModifier:

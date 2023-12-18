@@ -10,9 +10,11 @@
                 <div class="mb-3 mb-sm-0">
                     <h5 class="card-title fw-semibold mb-4">CONSULTATION D'UN ELEVE :</h5>
                 </div>
+                {% if is_granted('ROLE_ADMIN') %}
                 <div class="mb-3 mb-sm-0">
                     <a href="/23JELMUSIC/public/eleve/modifier/{{ eleve.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
                 </div>
+                {% endif %}
             </div>
             <div class="table-responsive">
                 <table class="table text-nowrap mb-0 align-middle ">
