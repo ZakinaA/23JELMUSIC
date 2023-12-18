@@ -38,22 +38,28 @@
                 <div class="mb-3 mb-sm-0">
                     <h3 class="card-title fw-semibold mb-4">LISTE DES ELEVES INSCRITS :</h3>
                 </div>
-                <div>
-                    <a href="/23JELMUSIC/public/inscription/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div>
+                        <a href="/23JELMUSIC/public/inscription/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                    </div>
+                {% endif %}
             </div>
             <table class="table text-nowrap mb-0 align-middle">
                 <tr class="tableauConsulterTitre">
                     <td>Nom</td>
                     <td>Prénom</td>
-                    <td>Actions</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>Actions</td>
+                    {% endif %}
                 </tr>
                 <tr>
                     {% for inscription in eleveInscrits %}
                         <tr>
                             <td>{{inscription.eleve.prenom}}</td>
                             <td>{{inscription.eleve.nom}}</td>
-                            <td ><a href="/23JELMUSIC/public/eleve/modifier/{{ inscription.eleve.id }}">✏️</a></td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td ><a href="/23JELMUSIC/public/eleve/modifier/{{ inscription.eleve.id }}">✏️</a></td>
+                            {% endif %}
                         </tr>
                     {% else %}
                         <td>Aucun élève inscrit.</td>
@@ -66,5 +72,8 @@
     <div class="mb-3 mb-sm-0">
         <a href="/23JELMUSIC/public/cours/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
     </div>
+    <br>
+    <br>
+    <br>
 {% endblock %}
 {% block javascripts %}{% endblock %}

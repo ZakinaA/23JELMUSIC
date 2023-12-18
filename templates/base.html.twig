@@ -71,15 +71,11 @@
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/23JELMUSIC/public/inscription/lister" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user"></i>
-                </span>
+                        <span>
+                          <i class="ti ti-user"></i>
+                        </span>
                             <span class="hide-menu">Inscriptions</span>
                         </a>
-                    </li>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">AUTHENTIFICATIONS</span>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                     <li class="sidebar-item">
@@ -97,17 +93,17 @@
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ path('connexion') }}" aria-expanded="false">
-                    <span>
-                      <i class="ti ti-login"></i>
-                    </span>
+                            <span>
+                              <i class="ti ti-login"></i>
+                            </span>
                                 <span class="hide-menu">Login</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ path('inscription') }}" aria-expanded="false">
-                    <span>
-                      <i class="ti ti-user-plus"></i>
-                    </span>
+                            <span>
+                              <i class="ti ti-user-plus"></i>
+                            </span>
                                 <span class="hide-menu">Register</span>
                             </a>
                         </li>

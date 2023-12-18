@@ -9,9 +9,11 @@
             <div class="mb-3 mb-sm-0">
                 <h5 class="card-title fw-semibold">Profil du professionnel {{ professionnel.nom }}</h5>
             </div>
-            <div class="mb-3 mb-sm-0">
-                <a href="/23JELMUSIC/public/professionnel/modifier/{{ professionnel.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
-            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="mb-3 mb-sm-0">
+                    <a href="/23JELMUSIC/public/professionnel/modifier/{{ professionnel.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
+                </div>
+            {% endif %}
         </div>
         <div class="table-responsive">
             <table class="table text-nowrap mb-0 align-middle ">
@@ -44,7 +46,9 @@
                     <td>INSTRUMENT :</td>
                     <td>DESCRIPTIF</td>
                     <td>PRIX</td>
-                    <td>ACTION</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>ACTION</td>
+                    {% endif %}
                 </tr>
 
                 {% for intervention in professionnel.interventions %}
@@ -54,7 +58,9 @@
                         <td style="padding: 10px">{{ intervention.instrument.nom }} </td>
                         <td style="padding: 10px">{{ intervention.descriptif }}</td>
                         <td style="padding: 10px">{{ intervention.prix }} €</td>
-                        <td><a href="/23JELMUSIC/public/intervention/modifier/{{ intervention.id }}">✏️</a></td>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <td><a href="/23JELMUSIC/public/intervention/modifier/{{ intervention.id }}">✏️</a></td>
+                        {% endif %}
                     </tr>
                 {% else %}
                     <tr>
@@ -66,6 +72,8 @@
         </div>
     </div>
     <a href="/23JELMUSIC/public/professionnel/lister"><button type="button" class="btn btn-primary m-1 ">Retour</button></a>
-
+    <br>
+    <br>
+    <br>
 {% endblock %}
 

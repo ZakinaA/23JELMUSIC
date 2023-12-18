@@ -3,33 +3,39 @@
 {% block title %}Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}){% endblock %}
 
 {% block body %}
-<div class="card-body p-4">
-    <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-        <div class="mb-3 mb-sm-0">
-            <h5 class="card-title fw-semibold">Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}) de type {{contratPret.instrument.type.libelle}}</h5>
-        </div>
-        {% if is_granted('ROLE_ADMIN') %}
-            <div>
-                <a href="{{ path('ContratPretModifier', { 'id': contratPret.id }) }}" class="btn btn-primary m-1">Modifier</a>
+    <div class="card-body p-4">
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+            <div class="mb-3 mb-sm-0">
+                <h5 class="card-title fw-semibold">Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}) de type {{contratPret.instrument.type.libelle}}</h5>
             </div>
-        {% endif %}
-    </div>
-    <div class="table-responsive">
-        <table class="table text-nowrap mb-0 align-middle">
+            {% if is_granted('ROLE_ADMIN') %}
+                <div>
+                    <a href="{{ path('ContratPretModifier', { 'id': contratPret.id }) }}" class="btn btn-primary m-1">Modifier</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="table-responsive">
+            <table class="table text-nowrap mb-0 align-middle">
 
-    <tr><td>Eleve : </td><td>{{contratPret.eleve.nom}} {{contratPret.eleve.prenom}}</td>
-    <tr><td>Responsables de l'élève : </td>
-        <td>
-            {% for responsable in contratPret.eleve.responsables %}
-            {{ responsable.nom }} {{ responsable.prenom }},
-            {% endfor %}
-        </td>
-    <tr><td>Date de debut : <br> Etat de l'instrument : </td><td>{{contratPret.datedebut|date("d/m/Y")}} <br> {{contratPret.etatdetailledebut}} </td></tr>
-    <tr><td>Date de fin : <br> Etat de l'instrument :</td><td>{{contratPret.datefin|date("d/m/Y")}} <br> {{contratPret.etatdetailleretour}}</td></tr>
-    <tr><td>Attestation d'assurance : </td><td>{{contratPret.Attestationassurance}} </td></tr>
+        <tr><td>Eleve : </td><td>{{contratPret.eleve.nom}} {{contratPret.eleve.prenom}}</td>
+        <tr><td>Responsables de l'élève : </td>
+            <td>
+                {% for responsable in contratPret.eleve.responsables %}
+                {{ responsable.nom }} {{ responsable.prenom }},
+                {% endfor %}
+            </td>
+        <tr><td>Date de debut : <br> Etat de l'instrument : </td><td>{{contratPret.datedebut|date("d/m/Y")}} <br> {{contratPret.etatdetailledebut}} </td></tr>
+        <tr><td>Date de fin : <br> Etat de l'instrument :</td><td>{{contratPret.datefin|date("d/m/Y")}} <br> {{contratPret.etatdetailleretour}}</td></tr>
+        <tr><td>Attestation d'assurance : </td><td>{{contratPret.Attestationassurance}} </td></tr>
 
-    </table>
+        </table>
+        </div>
     </div>
-</div>
+    <div class="mb-3 mb-sm-0">
+        <a href="/23JELMUSIC/public/contratPret/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+    </div>
+    <br>
+    <br>
+    <br>
 {% endblock %}
 

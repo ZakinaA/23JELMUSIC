@@ -78,13 +78,13 @@ class ProfessionnelController extends AbstractController
         $professionnel = $doctrine->getRepository(Professionnel::class)->find($id);
 
         $repository = $doctrine->getRepository(Professionnel::class);
-       $professionnels = $repository->findAll();
+        $professionnels = $repository->findAll();
 
         if (!$professionnel) {
            throw $this->createNotFoundException('Aucun professionnel trouvé avec le numéro '.$id);
-       }
-       else
-       {
+        }
+        else
+        {
             $form = $this->createForm(ProfessionnelModifierType::class, $professionnel);
             $form->handleRequest($request);
 
