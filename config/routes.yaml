@@ -2,6 +2,10 @@ controllers:
     resource: ../src/Controller/
     type: attribute
 
+acceuilConsulter:
+    path: /
+    controller: \App\Controller\AcceuilController::index
+
 connexion:
     path: /connexion
     controller: \App\Controller\SecurityController::login
@@ -13,7 +17,7 @@ inscription:
 deconnexion:
     path: /logout
     controller: \App\Controller\SecurityController::logout
-    
+
 instrumentConsulter:
     path: /instrument/consulter/{id}
     controller: \App\Controller\InstrumentController::consulterInstrument
@@ -85,6 +89,18 @@ InterventionAjouter:
 InterventionModifier:
     path: /intervention/modifier/{id}
     controller: App\Controller\InterventionController::modifierIntervention
+
+rgpdConsulter:
+    path: /rgpd
+    controller: \App\Controller\EgpdController::index
+
+ProfessionnelLister:
+    path: /professionnel/lister
+    controller: App\Controller\ProfessionnelController::listerProfessionnel
+
+ProfessionnelConsulter :
+    path: /professionnel/consulter/{id}
+    controller: App\Controller\ProfessionnelController::consulterProfessionnel
 
 eleveLister:
     path: /eleve/lister
