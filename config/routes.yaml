@@ -86,3 +86,7 @@ rgpdConsulter:
 ProfessionnelLister:
     path: /professionnel/lister
     controller: App\Controller\ProfessionnelController::listerProfessionnel
+
+ProfessionnelConsulter :
+    path: /professionnel/consulter/{id}
+    controller: App\Controller\ProfessionnelController::consulterProfessionnel

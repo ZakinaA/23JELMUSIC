@@ -27,14 +27,14 @@
                     <h6 class="fw-semibold mb-0">Mail</h6>
                 </th>
                 <th class="border-bottom-0">
-                    <h6 class="fw-semibold mb-0">Cours</h6>
+                    <h6 class="fw-semibold mb-0">Metiers</h6>
                 </th>
             </tr>
             </thead>
             <tbody>
             {% for p in pProfessionnel %}
                 <tr>
-                    <td>{{ p.nom }}</td>
+                    <td><a href="{{ path('ProfessionnelConsulter', {'id': p.id}) }}">{{ p.nom }}</td>
                     <td>{{ p.numRue }} {{ p.rue }} <br> {{ p.copos }} {{ p.ville }}</td>
                     <td>{{ p.tel }}</td>
                     <td>{{ p.mail }}</td>

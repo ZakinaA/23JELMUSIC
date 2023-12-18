@@ -28,4 +28,18 @@ class ProfessionnelController extends AbstractController
         ]);
 
     }
+
+    public function consulterProfessionnel(ManagerRegistry $doctrine, int $id){
+
+        $professionnel= $doctrine->getRepository(Professionnel::class)->find($id);
+
+        if (!$professionnel) {
+            throw $this->createNotFoundException(
+                'Aucun professionnel trouvé avec le numéro '.$id
+            );
+        }
+
+        return $this->render('professionnel/consulter.html.twig', [
+            'professionnel' => $professionnel,]);
+    }
 }
