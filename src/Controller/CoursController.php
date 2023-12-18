@@ -10,9 +10,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Twig\Environment;
-
-//use Symfony\Component\Routing\Annotation\Route;
 
 class CoursController extends AbstractController
 {
@@ -102,7 +99,7 @@ class CoursController extends AbstractController
 
         $cours = $doctrine->getRepository(Cours::class)->find($id);
 
-        $repository = $doctrine->getRepository(Cours::class);
+        //$repository = $doctrine->getRepository(Cours::class);
         //$cours = $repository->findAll();
 
         if (!$cours) {
