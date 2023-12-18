@@ -102,6 +102,14 @@ ProfessionnelConsulter :
     path: /professionnel/consulter/{id}
     controller: App\Controller\ProfessionnelController::consulterProfessionnel
 
+ProfessionnelAjouter :
+    path: /professionnel/ajouter
+    controller: App\Controller\ProfessionnelController::ajoutProfessionnel
+
+ProfessionnelModifier :
+    path: /professionnel/modifier/{id}
+    controller: App\Controller\ProfessionnelController::modifierProfessionnel
+
 eleveLister:
     path: /eleve/lister
     controller: App\Controller\EleveController::listerEleve
