@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AcceuilController extends AbstractController
 {
-
     public function index(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(Cours::class);

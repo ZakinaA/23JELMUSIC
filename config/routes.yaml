@@ -6,7 +6,18 @@ acceuilConsulter:
     path: /
     controller: \App\Controller\AcceuilController::index
 
-    
+connexion:
+    path: /connexion
+    controller: \App\Controller\SecurityController::login
+
+inscription:
+    path: /inscription
+    controller: \App\Controller\RegistrationController::register
+
+deconnexion:
+    path: /logout
+    controller: \App\Controller\SecurityController::logout
+
 instrumentConsulter:
     path: /instrument/consulter/{id}
     controller: \App\Controller\InstrumentController::consulterInstrument
@@ -90,3 +101,19 @@ ProfessionnelLister:
 ProfessionnelConsulter :
     path: /professionnel/consulter/{id}
     controller: App\Controller\ProfessionnelController::consulterProfessionnel
+
+eleveLister:
+    path: /eleve/lister
+    controller: App\Controller\EleveController::listerEleve
+
+eleveConsulter:
+    path: /eleve/consulter/{id}
+    controller: App\Controller\EleveController::consulterEleve
+
+eleveAjouter:
+    path: /eleve/ajouter
+    controller: App\Controller\EleveController::ajouterEleve
+
+eleveModifier:
+    path: /eleve/modifier/{id}
+    controller: App\Controller\EleveController::modifierEleve
