@@ -10,11 +10,10 @@ use Proxies\__CG__\App\Entity\Eleve;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class EleveController extends AbstractController
 {
-    #[Route('/eleve', name: 'app_eleve')]
+    /*#[Route('/eleve', name: 'app_eleve')]*/
     public function index(): Response
     {
         return $this->render('eleve/index.html.twig', [
@@ -85,7 +84,7 @@ class EleveController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($eleve);
                 $entityManager->flush();
-                return $this->render('eleve/lister.html.twig',['eleve' => $eleve,]);
+                return $this->redirectToRoute("eleveLister");
             }
             else{
                 return $this->render('eleve/ajouter.html.twig', array('form' => $form->createView(),));
