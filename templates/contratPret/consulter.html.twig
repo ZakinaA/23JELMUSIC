@@ -8,9 +8,11 @@
         <div class="mb-3 mb-sm-0">
             <h5 class="card-title fw-semibold">Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}) de type {{contratPret.instrument.type.libelle}}</h5>
         </div>
-        <div>
-            <a href="{{ path('ContratPretModifier', { 'id': contratPret.id }) }}" class="btn btn-primary m-1">Modifier</a>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div>
+                <a href="{{ path('ContratPretModifier', { 'id': contratPret.id }) }}" class="btn btn-primary m-1">Modifier</a>
+            </div>
+        {% endif %}
     </div>
     <div class="table-responsive">
         <table class="table text-nowrap mb-0 align-middle">

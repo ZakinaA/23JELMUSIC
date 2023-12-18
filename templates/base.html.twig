@@ -31,47 +31,42 @@
                 <ul id="sidebarnav">
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/23JELMUSIC/public/" aria-expanded="false">
-                <span>
-                  <i class="ti ti-home"></i>
-                </span>
+                        <span>
+                          <i class="ti ti-home"></i>
+                        </span>
                             <span class="hide-menu">Home</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/23JELMUSIC/public/cours/lister" aria-expanded="false">
-                <span>
-                  <i class="ti ti-album"></i>
-                </span>
+                        <span>
+                          <i class="ti ti-album"></i>
+                        </span>
                             <span class="hide-menu">Cours</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/23JELMUSIC/public/contratPret/lister" aria-expanded="false">
-                <span>
-                  <i class="ti ti-align-box-right-bottom"></i>
-                </span>
+                        <span>
+                          <i class="ti ti-align-box-right-bottom"></i>
+                        </span>
                             <span class="hide-menu">Contrats Prêts</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/23JELMUSIC/public/instrument/lister" aria-expanded="false">
-                <span>
-                  <i class="ti ti-music"></i>
-                </span>
+                        <span>
+                          <i class="ti ti-music"></i>
+                        </span>
                             <span class="hide-menu">Instruments</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/23JELMUSIC/public/professionnel/lister" aria-expanded="false">
-                <span>
-                  <i class="ti ti-users"></i>
-                </span>
+                        <span>
+                          <i class="ti ti-users"></i>
+                        </span>
                             <span class="hide-menu">professionnel</span>
-                        <a class="sidebar-link" href="/23JELMUSIC/public/eleve/lister" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user"></i>
-                </span>
-                            <span class="hide-menu">Eleves</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -86,22 +81,36 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">AUTHENTIFICATIONS</span>
                     </li>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-login"></i>
-                </span>
-                            <span class="hide-menu">Login</span>
+                        <a class="sidebar-link" href="/23JELMUSIC/public/eleve/lister" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-user"></i>
+                            </span>
+                            <span class="hide-menu">Eleves</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                            <span class="hide-menu">Register</span>
-                        </a>
-                    </li>
+                    {% endif %}
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">AUTHENTIFICATIONS</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ path('connexion') }}" aria-expanded="false">
+                    <span>
+                      <i class="ti ti-login"></i>
+                    </span>
+                                <span class="hide-menu">Login</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ path('inscription') }}" aria-expanded="false">
+                    <span>
+                      <i class="ti ti-user-plus"></i>
+                    </span>
+                                <span class="hide-menu">Register</span>
+                            </a>
+                        </li>
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->

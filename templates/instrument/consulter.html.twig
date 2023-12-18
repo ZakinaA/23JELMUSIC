@@ -7,11 +7,13 @@
         <div class="card-body">
             <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                 <div class="mb-3 mb-sm-0">
-                    <h3 class="card-title fw-semibold mb-4">Fiche de l'instrument : {{ instrument.Nom }}</h3>
+                    <h3 class="card-title fw-semibold mb-4">Fiche de l'instrument : {{ instrument.nom }}</h3>
                 </div>
-                <div class="mb-3 mb-sm-0">
-                    <a href="/23JELMUSIC/public/instrument/modifier/{{ instrument.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="mb-3 mb-sm-0">
+                        <a href="/23JELMUSIC/public/instrument/modifier/{{ instrument.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
+                    </div>
+                {% endif %}
             </div>
             <table border="1px" class="table text-nowrap mb-0 align-middle">
                 <tr><td style="text-align: center">Nom : </td><td style="text-align: center"> {{instrument.type.libelle}} : {{instrument.Nom}}</td><td  rowspan="6">{% set photo = 'img/' ~  instrument.type.libelle  ~ '.jpg' %}<span class="zoom"><img  style="height: 200px; width: 200px;" src="{{ asset(photo | trans )}}" alt="{{ instrument.type.classe.libelle ~ " " ~ instrument.type.libelle }}"/></span></td>
@@ -30,11 +32,13 @@
         <div class="card-body">
             <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                 <div class="mb-3 mb-sm-0">
-                    <h3 class="card-title fw-semibold mb-4">Liste des interventions de l'instrument : {{ instrument.Nom }}</h3>
+                    <h3 class="card-title fw-semibold mb-4">Liste des interventions de l'instrument : {{ instrument.nom }}</h3>
                 </div>
-                <div>
-                    <a href="/23JELMUSIC/public/intervention/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div>
+                        <a href={{ path('InterventionAjouter', {'instrumentId': instrument.id}) }}><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                    </div>
+                {% endif %}
             </div>
             <table border="1px" style="text-align: center" class="table text-nowrap mb-0 align-middle">
                 <tr class="tableauConsulterTitre">
@@ -43,7 +47,9 @@
                     <td>PROFESSIONNEL</td>
                     <td>DESCRIPTIF</td>
                     <td>PRIX</td>
-                    <td>ACTION</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>ACTION</td>
+                    {% endif %}
                 </tr>
 
                 {% for intervention in instrument.interventions %}
@@ -53,8 +59,9 @@
                         <td style="padding: 10px">{{ intervention.professionnel.nom }} <br> {{ intervention.professionnel.numRue }} {{ intervention.professionnel.rue }} <br> {{ intervention.professionnel.copos }} {{ intervention.professionnel.ville }}</td>
                         <td style="padding: 10px">{{ intervention.descriptif }}</td>
                         <td style="padding: 10px">{{ intervention.prix }} €</td>
-                        <td><a href="/23JELMUSIC/public/intervention/modifier/{{ intervention.id }}">✏️</a></td>
-
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <td><a href="/23JELMUSIC/public/intervention/modifier/{{ intervention.id }}">✏️</a></td>
+                        {% endif %}
                     </tr>
                 {% else %}
                     <tr>
@@ -66,4 +73,8 @@
         </div>
     </div>
     <a href="/23JELMUSIC/public/instrument/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+    <br>
+    <br>
+    <br>
+
 {% endblock %}

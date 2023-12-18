@@ -10,9 +10,11 @@
                 <div class="mb-3 mb-sm-0">
                     <h3 class="card-title fw-semibold mb-4">LISTE DES INSTRUMENTS</h3>
                 </div>
-                <div>
-                    <a href="/23JELMUSIC/public/instrument/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div>
+                        <a href="/23JELMUSIC/public/instrument/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                    </div>
+                {% endif %}
             </div>
 
             <div class="table-responsive">
