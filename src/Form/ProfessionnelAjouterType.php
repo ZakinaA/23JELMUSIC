@@ -78,10 +78,10 @@ class ProfessionnelAjouterType extends AbstractType
                 'attr' => ['class' => 'mb-4 form-control'],
                 'required' => false,
             ])
-            ->add('tel', NumberType::class, [
+            ->add('tel', TextType::class, [
                 'constraints' => [
                     new Length([
-                        'min' => 14,
+                        'min' => 10,
                         'max' => 17,
                         'minMessage' => 'Il faut {{ limit }} chiffre.',
                         'maxMessage' => 'il faut pas plus de  {{ limit }} chiffre.',
@@ -104,7 +104,7 @@ class ProfessionnelAjouterType extends AbstractType
             ->add('enregistrer', SubmitType::class, [
 
                 'label' => 'Ajouter un contrat',
-                'attr' => ['class' => 'btn btn-primary m-1']
+                'attr' => ['class' => 'btn btn-primary']
 
             ])
         ;

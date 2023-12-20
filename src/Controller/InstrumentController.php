@@ -57,9 +57,7 @@ class InstrumentController extends AbstractController
             $entityManager->flush();
 
             return $this->render('instrument/consulter.html.twig', ['instrument' => $instrument,]);
-        }
-        else
-        {
+        } else {
             return $this->render('instrument/ajouter.html.twig', array('form' => $form->createView(),));
         }
     }

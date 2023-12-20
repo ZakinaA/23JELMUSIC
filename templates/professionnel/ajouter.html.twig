@@ -2,16 +2,15 @@
 
 {% block title %}Ajouter d'un professionnel{% endblock %}
 {% block body %}
-        <div class="card">
-            <h3 class="mb-2 card-title fw-semibold">Ajouter un professionnel</h3>
-            <div class="card-body">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="mb-4 card-title fw-semibold">Ajouter un professionnel</h5>
             {# templates/etudiant/ajouter.html.twig #}
             {{ form_start(form) }}
             {{ form_widget(form) }}
             {{ form_end(form) }}
-                <a href="/23JELMUSIC/public/professionnel/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+            <a href="/23JELMUSIC/public/professionnel/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
 
-            </div>
-       </div>
-    </div>
+        </div>
+   </div>
 {% endblock %}
