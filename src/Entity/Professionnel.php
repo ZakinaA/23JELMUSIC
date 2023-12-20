@@ -31,7 +31,7 @@ class Professionnel
     private ?string $ville = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $tel = null;
+    private ?string $tel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Email(message:"Veuillez saisir un mail valide")]
@@ -114,12 +114,12 @@ class Professionnel
         return $this;
     }
 
-    public function getTel(): ?int
+    public function getTel(): ?string
     {
         return $this->tel;
     }
 
-    public function setTel(?int $tel): static
+    public function setTel(?string $tel): static
     {
         $this->tel = $tel;
 

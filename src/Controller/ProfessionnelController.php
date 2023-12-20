@@ -2,27 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Instrument;
-use App\Form\InstrumentModifierType;
 use App\Form\ProfessionnelAjouterType;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Professionnel;
 use App\Form\ProfessionnelModifierType;
 
 class ProfessionnelController extends AbstractController
 {
-    //#[Route('/professionnel', name: 'app_professionnel')]
+    /*#[Route('/professionnel', name: 'app_professionnel')]
     public function index(): Response
     {
         return $this->render('professionnel/index.html.twig', [
             'controller_name' => 'ProfessionnelController',
         ]);
-    }
+    }*/
 
     public function listerProfessionnel(ManagerRegistry $doctrine)
     {
@@ -47,12 +43,10 @@ class ProfessionnelController extends AbstractController
             );
         }
 
-        return $this->render('professionnel/consulter.html.twig', [
-            'professionnel' => $professionnel,]);
+        return $this->render('professionnel/consulter.html.twig', ['professionnel' => $professionnel,]);
     }
 
-    public function ajoutProfessionnel(Request $request, PersistenceManagerRegistry $doctrine): Response
-    {
+    public function ajoutProfessionnel(ManagerRegistry $doctrine, Request $request){
 
         $professionnel = new professionnel();
         $form = $this->createForm(ProfessionnelAjouterType::class, $professionnel);
@@ -66,8 +60,7 @@ class ProfessionnelController extends AbstractController
             $entityManager->persist($professionnel);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Professionnel crée avec succes!');
-            return $this->redirectToRoute('listerProfessionnel');
+            return $this->render('professionnel/consulter.html.twig', ['professionnel' => $professionnel]);
         } else {
             return $this->render('professionnel/ajouter.html.twig', array('form' => $form->createView(),));
         }
@@ -90,11 +83,13 @@ class ProfessionnelController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-               $professionnel = $form->getData();
+                $professionnel = $form->getData();
+
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($professionnel);
                 $entityManager->flush();
-                return $this->render('professionnel/consulter.html.twig', ['instrument' => $professionnel, 'pInstruments' => $professionnels]);
+
+                return $this->render('professionnel/consulter.html.twig', ['professionnel' => $professionnel, 'pProfessionnel' => $professionnels]);
             }
             else{
                 return $this->render('professionnel/modifier.html.twig', array('form' => $form->createView(), 'instrument' => $professionnel,));
