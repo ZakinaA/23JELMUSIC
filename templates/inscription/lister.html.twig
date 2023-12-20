@@ -38,22 +38,21 @@
                             </th>
                         </tr>
                         </thead>
-
                         {% for i in pInscription %}
-                            <td>{{ i.eleve.nom }} {{ i.eleve.prenom }}</td>
-                            <td><a href="{{ path('coursConsulter', { 'id': i.cours.id }) }}">{{ i.cours.typeInstruments.libelle }}</a></td>
-                            <td>{{ i.cours.jours.libelle }}</td>
-                            <td>{{ i.dateInscription|date("d/m/Y") }}</td>
-                            <td>
-                                <a href="/23JELMUSIC/public/inscription/consulter/{{ i.id }}">👁️</a>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="/23JELMUSIC/public/inscription/modifier/{{ i.id }}">✏️</a>
-                                {% endif %}
-                            </td>
                             <tr>
+                                <td>{{ i.eleve.nom }} {{ i.eleve.prenom }}</td>
+                                <td><a href="{{ path('coursConsulter', { 'id': i.cours.id }) }}">{{ i.cours.typeInstruments.libelle }}</a></td>
+                                <td>{{ i.cours.jours.libelle }}</td>
+                                <td>{{ i.dateInscription|date("d/m/Y") }}</td>
+                                <td>
+                                    <a href="/23JELMUSIC/public/inscription/consulter/{{ i.id }}">👁️</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="/23JELMUSIC/public/inscription/modifier/{{ i.id }}">✏️</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
                         {% endfor %}
                     </table>
-
                 {% else %}
                     <tr>
                         <td>Aucun cours n'a été trouvé.</td>
