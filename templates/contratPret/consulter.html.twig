@@ -3,7 +3,7 @@
 {% block title %}Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}){% endblock %}
 
 {% block body %}
-    <div class="card-body p-4">
+    <div class="card-body p-4" style="box-shadow: lightgrey 1px 1px 10px 1px">
         <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
             <div class="mb-3 mb-sm-0">
                 <h5 class="card-title fw-semibold">Prêt de {{contratPret.instrument.nom}} (serie {{contratPret.instrument.numserie}}) de type {{contratPret.instrument.type.libelle}}</h5>
