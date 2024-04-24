@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : lun. 15 avr. 2024 à 13:25
+-- Généré le : mer. 24 avr. 2024 à 11:27
 -- Version du serveur : 8.0.25
 -- Version de PHP : 8.1.22
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `23JELMUSIC`
 --
-CREATE DATABASE IF NOT EXISTS `23JELMUSIC` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `23JELMUSIC`;
 
 -- --------------------------------------------------------
 
