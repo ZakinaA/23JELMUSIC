@@ -20,7 +20,7 @@
                 <table class="table text-nowrap mb-0 align-middle ">
                     <thead class="text-dark fs-4">
                         <tr><td>Professeur :</td><td>{{cours.professeur.nom}} {{cours.professeur.prenom}}</td></tr>
-                        <tr><td>Type d'instrument : </td><td><a href="{{ path('instrumentConsulter', { 'id': cours.typeInstruments.id }) }}">{{cours.typeInstruments.libelle}}</a></td></tr>
+                        <tr><td>Type d'instrument : </td><td>{{cours.typeInstruments.libelle}}</a></td></tr>
                         <tr><td>Jours : </td><td>{{cours.jours.libelle}}</td></tr>
                         <tr><td>Heure de début : </td><td>{{cours.heuredebut|date('H:i')}}</td></tr>
                         <tr><td>Heure de fin : </td><td>{{cours.heurefin|date('H:i')}}</td></tr>
