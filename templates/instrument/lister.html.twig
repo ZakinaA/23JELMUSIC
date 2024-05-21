@@ -45,6 +45,9 @@
                         <th class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">COULEURS</h6>
                         </th>
+                        <th class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0">FOURNISSEUR</h6>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,6 +64,13 @@
                             {% for couleur in instrument.couleurs %}
                                 <td>{{ couleur.nom | default('N/A') }}</td>
                             {% endfor %}
+                            <td>
+                                {% if instrument.fournisseur is not null %}
+                                    <a href="{{ path('fournisseurConsulter', { 'id': instrument.fournisseur.id }) }}">{{ instrument.fournisseur.nom }}</a>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
 
 
                         </tr>

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ListerFournisseur{% endblock %}
+    {% block stylesheets %}{% endblock %}
+{% block body %}
+    <div class="card" style="box-shadow: lightgrey 1px 1px 10px 1px; margin-left: -100px">
+        <div class="card-body">
+            <div class="card-body p-4">
+                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                    <div class="mb-3 mb-sm-0">
+                        <h3 class="card-title fw-semibold mb-4">LISTE DES FOURNISSEURS</h3>
+                    </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div>
+                            <a href="/23JELMUSIC/public/fournisseur/ajouter"><button type="button" class="btn btn-primary m-1">Ajouter</button></a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table text-nowrap mb-0 align-middle">
+                        <thead class="text-dark fs-4">
+                        <tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">NOM</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">ADRESSE</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">TELEPHONE</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">MAIL</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">CONTACT</h6>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for fournisseur in pFournisseurs %}
+
+                            <tr>
+                                <td><a href="{{ path('fournisseurConsulter', { 'id': fournisseur.id }) }}">{{ fournisseur.nom }}</a></td>
+                                <td>{{ fournisseur.adresse }}</td>
+                                <td>{{ fournisseur.telephone }}</td>
+                                <td>{{ fournisseur.mail }}</td>
+                                <td>{{ fournisseur.contact }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Aucun fournisseur n'a été trouvé.</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}{% endblock %}

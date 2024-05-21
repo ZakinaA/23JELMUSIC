@@ -141,3 +141,19 @@ inscriptionAjouter:
 inscriptionModifier:
     path: /inscription/modifier/{id}
     controller: App\Controller\InscriptionController::modifierInscription
+
+fournisseurlister:
+    path: /fournisseur/lister
+    controller: App\Controller\FournisseurController::listerFournisseur
+
+fournisseurConsulter:
+    path: /fournisseur/consulter/{id}
+    controller: App\Controller\FournisseurController::consulterFournisseur
+
+fournisseurAjouter:
+    path: /fournisseur/ajouter
+    controller: App\Controller\FournisseurController::ajouterFournisseur
+
+fournisseurModifier:
+    path: /fournisseur/modifier/{id}
+    controller: App\Controller\FournisseurController::modifierFournisseur

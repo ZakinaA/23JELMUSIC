@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consulter un instrument{% endblock %}
+
+{% block body %}
+    <div class="card" style="box-shadow: lightgrey 1px 1px 10px 1px">
+        <div class="card-body">
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                    <h3 class="card-title fw-semibold mb-4">Fiche du fournisseur : {{ fournisseur.nom }}</h3>
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="mb-3 mb-sm-0">
+                        <a href="/23JELMUSIC/public/fournisseur/modifier/{{ fournisseur.id }}"><button type="button" class="btn btn-primary m-1">Modifier</button></a>
+                    </div>
+                {% endif %}
+            </div>
+            <table border="1px" class="table text-nowrap mb-0 align-middle">
+                <tr><td style="text-align: center">Nom : </td><td style="text-align: center">{{fournisseur.nom}}</td>
+                <tr><td style="text-align: center">Adresse : </td><td style="text-align: center">{{fournisseur.adresse}}</td></tr>
+                <tr><td style="text-align: center">Téléphone : </td><td style="text-align: center">{{fournisseur.telephone}}</td></tr>
+                <tr><td style="text-align: center">Mail : </td><td style="text-align: center">{{fournisseur.mail}}</td></tr>
+                <tr><td style="text-align: center">Contact : </td><td style="text-align: center">{{fournisseur.contact}}</td></tr>
+            </table>
+        </div>
+    </div>
+    <a href="/23JELMUSIC/public/fournisseur/lister"><button type="button" class="btn btn-primary m-1">Retour</button></a>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

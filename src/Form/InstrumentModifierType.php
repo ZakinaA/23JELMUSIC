@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Couleur;
+use App\Entity\Fournisseur;
 use App\Entity\Instrument;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -61,6 +62,13 @@ class InstrumentModifierType extends AbstractType
                         'maxMessage' => 'Vous ne pouvez sélectionner que deux couleurs au maximum.',
                     ]),
                 ],
+            ]))
+            ->add('fournisseur', EntityType::class, ([
+                'class' => Fournisseur::class,
+                'choice_label' => 'nom',
+                'attr' => ['class' => 'mb-4 form-control'],
+                'multiple' => false,
+                'expanded' => false,
             ]))
             ->add('enregistrer', SubmitType::class, [
                 'label' => 'Modification Instrument',

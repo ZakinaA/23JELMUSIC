@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Couleur;
+use App\Entity\Fournisseur;
 use App\Entity\Instrument;
 use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
@@ -68,6 +69,14 @@ class InstrumentAjouterType extends AbstractType
                     ]),
                 ],
             ]))
+            ->add('fournisseur', EntityType::class, ([
+                'class' => Fournisseur::class,
+                'choice_label' => 'nom',
+                'attr' => ['class' => 'mb-4 form-control'],
+                'multiple' => false,
+                'expanded' => false,
+            ]))
+
             ->add('enregistrer', SubmitType::class, [
                 'label' => 'Nouvel Instrument',
                 'attr' => ['class' => 'btn btn-primary'],
